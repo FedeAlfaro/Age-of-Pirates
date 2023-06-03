@@ -1,0 +1,12 @@
+General\IConstants.class
+Islas\Conector.class
+Fabricas\Fabrica.class
+Fabricas\Mina.class
+Fabricas\TemploBruja.class
+Listener.class
+Fabricas\Armeria.class
+Communication\Package.class
+General\AgeOfPirates.class
+General\BarcoFantasma.class
+Islas\FuenteEnergia.class
+Fabricas\Enum\ORIENTACION.class
