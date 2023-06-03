@@ -23,15 +23,14 @@ import java.util.logging.Logger;
  */
 public class SocketServer implements Runnable, IConstants{
     
-    private InterfazServidor panel;
+    //private InterfazServidor panel;
     private boolean listening;
     private static final Logger LOGGER = Logger.getLogger(SocketServer.class.getName());
     private ServerSocket socketListener;
     private ArrayList<SocketClient> clientes;
 
-     public SocketServer(InterfazServidor pPanel) {
+     public SocketServer() {
         listening = true;
-        panel = pPanel;
     }
 
     /**
@@ -64,9 +63,9 @@ public class SocketServer implements Runnable, IConstants{
                     Socket connection = socketListener.accept();
                     ObjectInputStream data = new ObjectInputStream(connection.getInputStream());
                     recievedData = (Package) data.readObject();
-                    if(recievedData.getCodigoPaquete()==1){
-                        processMessage(recievedData.getNickName()+": "+recievedData.getMessage());
-                    }
+                    //if(recievedData.getCodigoPaquete()==1){
+                    //    processMessage(recievedData.getNickName()+": "+recievedData.getMessage());
+                    //}
                     SocketClient socket = new SocketClient(recievedData.getIp(),PORT_NUMBER_SERVER_CLIENT);
                     socket.sendObj(recievedData);
                     socket.close();
@@ -89,9 +88,9 @@ public class SocketServer implements Runnable, IConstants{
     public String transformarMensaje(SocketClient client) throws IOException {
         return client.getInput().readLine();
     }
-    
+    /*
     public void processMessage(String pMsg) {
         panel.setArea(pMsg);
-    }
+    }*/
     
 }

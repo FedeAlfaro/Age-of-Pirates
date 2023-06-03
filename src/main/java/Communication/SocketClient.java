@@ -40,8 +40,8 @@ public class SocketClient extends Thread {
      * @param pPanel Game corresponde a un panel
      * @throws Exception 
      */
-    public SocketClient(String pIpAddress, int pPort, Game pPanel) throws Exception {
-        panel = pPanel;
+    public SocketClient(String pIpAddress, int pPort) throws Exception {
+        //panel = pPanel;
         try {
             Socket socket = new Socket( pIpAddress, pPort);
             setSocket(socket);
@@ -57,6 +57,7 @@ public class SocketClient extends Thread {
      * @param pPort int corresponde al puerto del servidor
      * @throws Exception 
      */
+    /*
     public SocketClient(String pIpAddress, int pPort) throws Exception {
         try {
             Socket socket = new Socket( pIpAddress, pPort);
@@ -64,7 +65,7 @@ public class SocketClient extends Thread {
         } catch (Exception ex) {
                 LOGGER.log(Level.SEVERE, "Error creating socket", ex);
         }
-    }
+    }*/
     
     /**
      * Constructor a partir del socket de referencia
@@ -121,18 +122,22 @@ public class SocketClient extends Thread {
      * Procesa un mensaje recibido
      * @param pMsg String corresponde al mensaje recibido
      */
+    /*
     public void processMessage(String pMsg) {
         panel.setArea(pMsg);
         System.out.println("Client: " + pMsg);
     }
+    */
     
     /**
      * Procesa un objeto recibido
      * @param pData Package corresponde al paquete de datos recibido
      */
+    /*
     public void processObject(Package pData) {
         panel.setArea(pData.getNickName()+": "+pData.getMessage());
     }
+    */
 
     public void processMessage(byte[] pMsg) {
         //This method should be implemented with the specific processing 
