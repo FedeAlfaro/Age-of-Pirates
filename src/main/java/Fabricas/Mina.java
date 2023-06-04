@@ -20,7 +20,7 @@ public class Mina extends Fabrica implements IConstants{
         this.costo = PRECIO_ARMERIA;
         this.velocidadProduccion = TIEMPO_MINADO;
         this.cantidadAceroMinado = CANTIDAD_ACERO_PRODUCIDA;
-        this.nombre = "Armeria";
+        this.nombre = "Mina";
     }
 
     public int getCosto() {

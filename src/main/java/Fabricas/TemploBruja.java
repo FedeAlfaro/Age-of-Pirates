@@ -16,7 +16,7 @@ public class TemploBruja extends Fabrica implements IConstants{
     public TemploBruja(int x, int y, int orientacion) {
         super(x,y,orientacion);
         this.tiempoComodin = TIEMPO_COMODIN;
-        this.nombre = "Armeria";
+        this.nombre = "Templo de brujas";
     }
     
     
