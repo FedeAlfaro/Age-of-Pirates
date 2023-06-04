@@ -13,9 +13,11 @@ public class Armeria extends Fabrica implements IConstants{
     private int costo;
     private int velocidadProduccion;
 
-    public Armeria() {
+    public Armeria(int x, int y, int orientacion) {
+        super(x,y,orientacion);
         this.costo = PRECIO_ARMERIA;
         this.velocidadProduccion = velocidadProduccion;
+        this.nombre = "Armeria";
     }
 
     

@@ -15,10 +15,12 @@ public class Mina extends Fabrica implements IConstants{
     private int velocidadProduccion;
     private int cantidadAceroMinado;
 
-    public Mina() {
+    public Mina(int x, int y, int orientacion) {
+        super(x,y,orientacion);
         this.costo = PRECIO_ARMERIA;
         this.velocidadProduccion = TIEMPO_MINADO;
         this.cantidadAceroMinado = CANTIDAD_ACERO_PRODUCIDA;
+        this.nombre = "Armeria";
     }
 
     public int getCosto() {
@@ -45,5 +47,8 @@ public class Mina extends Fabrica implements IConstants{
         this.cantidadAceroMinado = cantidadAceroMinado;
     }
     
-    
+    @Override
+    public void producir(){
+        
+    }
 }

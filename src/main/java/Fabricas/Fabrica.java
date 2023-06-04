@@ -10,10 +10,19 @@ import Fabricas.Enum.ORIENTACION;
  *
  * @author Usuario
  */
-public class Fabrica {
+public class Fabrica implements Productor{
+    protected String nombre;
     protected int x;
     protected int y;
     protected ORIENTACION orientacion;
+    protected boolean visible;
+
+    public Fabrica(int x, int y, int orientacion) {
+        this.x = x;
+        this.y = y;
+        this.orientacion = ORIENTACION.values()[orientacion];
+        this.visible = false;
+    }
 
     public int getX() {
         return x;
@@ -39,5 +48,17 @@ public class Fabrica {
         this.orientacion = orientacion;
     }
     
+    public void mostrar(){
+        visible = true;
+    }
+    
+    public void noMostrar(){
+        visible = false;
+    }
+
+    @Override
+    public void producir() {
+        
+    }
     
 }
