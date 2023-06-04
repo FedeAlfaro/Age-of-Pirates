@@ -19,7 +19,7 @@ public class Bomba extends Arma{
     public Bomba(int targetX, int targetY){
         this.targetX = targetX;
         this.targetY = targetY;
-        this.coste = Precios.PRECIO_CANNON;
+        this.coste = PRECIO_CANNON;
         this.horizontal = new Random().nextBoolean(); 
     }
     

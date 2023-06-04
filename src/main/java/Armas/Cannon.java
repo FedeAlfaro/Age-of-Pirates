@@ -16,7 +16,7 @@ public class Cannon extends Arma{
     public Cannon(int targetX, int targetY){
         this.targetX = targetX;
         this.targetY = targetY;
-        this.coste = Precios.PRECIO_CANNON;
+        this.coste = PRECIO_CANNON;
     }
     
     // Métodos

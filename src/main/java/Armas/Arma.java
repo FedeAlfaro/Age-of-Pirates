@@ -4,6 +4,7 @@
  */
 package Armas;
 
+import General.IConstants;
 import Jugador.*;
 import Mapa.Grafo;
 
@@ -11,7 +12,7 @@ import Mapa.Grafo;
  *
  * @author sotic
  */
-public abstract class Arma {
+public abstract class Arma implements IConstants{
     
     public int targetX;
     public int targetY;

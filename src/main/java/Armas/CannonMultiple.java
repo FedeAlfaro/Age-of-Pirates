@@ -16,7 +16,7 @@ public class CannonMultiple extends Arma{
     public CannonMultiple(int targetX, int targetY){
         this.targetX = targetX;
         this.targetY = targetY;
-        this.coste = Precios.PRECIO_CANNONMULTIPLE;
+        this.coste = PRECIO_CANNONMULTIPLE;
     }
     
     // Métodos

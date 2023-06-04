@@ -16,7 +16,7 @@ public class CannonBarbaRoja extends Arma{
     public CannonBarbaRoja(int targetX, int targetY){
         this.targetX = targetX;
         this.targetY = targetY;
-        this.coste = Precios.PRECIO_CANNONBARBAROJA;
+        this.coste = PRECIO_CANNONBARBAROJA;
     }
     
     // Métodos

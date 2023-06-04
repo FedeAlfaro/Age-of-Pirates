@@ -4,23 +4,26 @@
  */
 package Jugador;
 
+import General.IConstants;
 import Mapa.*;
 
 /**
  *
  * @author sotic
  */
-public class Jugador {
+public class Jugador implements IConstants{
  
     // Atributos
     private Grafo mapa;
     private Inventario inventario;
-    private int dinero = 4000;
-    private boolean vivo = true;
+    private int dinero;
+    private boolean vivo;
     private String username;
     
     // Constructor
     public Jugador(Grafo mapa, String username) {
+        vivo = true;
+        dinero = DINERO_INICIAL;
         this.mapa = mapa;
         this.inventario = new Inventario();
         this.username = username; 

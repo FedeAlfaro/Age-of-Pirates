@@ -28,4 +28,11 @@ public interface IConstants {
     
     public static final int PORT_NUMBER_SERVER = 5000;
     public static final int PORT_NUMBER_SERVER_CLIENT = 10000;
+    
+    public static final int DINERO_INICIAL = 4000;
+    
+    public static final int PRECIO_CANNON = 500;
+    public static final int PRECIO_CANNONMULTIPLE = 1000;
+    public static final int PRECIO_BOMBA = 2000;
+    public static final int PRECIO_CANNONBARBAROJA = 5000;
 }
