@@ -5,6 +5,9 @@ Islas\Grafo.class
 Fabricas\TemploBruja.class
 Jugador\Inventario.class
 Islas\FuenteEnergia.class
+Chat\ClientHandler.class
+Chat\Server.class
+Chat\Client.class
 Mapa\Grafo.class
 Communication\Package.class
 General\AgeOfPirates.class
@@ -15,6 +18,7 @@ Armas\Cannon.class
 Armas\Arma.class
 Mapa\Vertice.class
 Fabricas\Enum\ORIENTACION.class
+Chat\Constants.class
 General\PorMientras.class
 Islas\Conector.class
 Fabricas\Fabrica.class
