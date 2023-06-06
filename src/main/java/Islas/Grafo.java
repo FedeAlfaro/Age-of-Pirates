@@ -5,6 +5,7 @@
 package Islas;
 
 import Fabricas.Fabrica;
+import General.IConstants;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @author dmora
  * @author Federico Alfaro
  */
-public class Grafo {
+public class Grafo implements IConstants{
 
     ArrayList<Vertice> vertices;
     FuenteEnergia fuente;
@@ -261,5 +262,82 @@ public class Grafo {
             vertices.stream().forEach(p->p.mostrarTodo() );
         }
         return false;
+    }
+    
+    public int[][] retornarMatriz(){ //-1 conector 
+        int matriz[][] = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        for(int i=0;i<vertices.size();i++){
+            for(int j=0;j< vertices.get(i).conectores.size();j++){
+                Conector conector = vertices.get(i).conectores.get(j);
+                matriz[conector.getX()][conector.getY()] = CODIGO_CONECTOR;
+            }
+            if(vertices.get(i).fabrica!=null){
+                if(vertices.get(i).fabrica.getNombre() == "Armeria"){
+                    matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
+                }else if(vertices.get(i).fabrica.getNombre() == "Mina"){
+                    matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
+                }else if(vertices.get(i).fabrica.getNombre() == "Templo de brujas"){
+                    matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                }
+            }
+            if(fuente!=null){
+                matriz[fuente.getX()][fuente.getY()] = CODIGO_FUENTE;
+            }
+        }
+        
+        return matriz;
+    }
+    
+    public int[][] retornarMatrizVisible(){ //-1 conector 
+        int matriz[][] = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        for(int i=0;i<vertices.size();i++){
+            for(int j=0;j< vertices.get(i).conectores.size();j++){
+                Conector conector = vertices.get(i).conectores.get(j);
+                if(conector.isVisible()){
+                    matriz[conector.getX()][conector.getY()] = CODIGO_CONECTOR;
+                }
+            }
+            if(vertices.get(i).fabrica!=null){
+                if(vertices.get(i).fabrica.isVisible()){
+                    if(vertices.get(i).fabrica.getNombre() == "Armeria"){
+                        matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
+                    }else if(vertices.get(i).fabrica.getNombre() == "Mina"){
+                        matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
+                    }else if(vertices.get(i).fabrica.getNombre() == "Templo de brujas"){
+                        matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                    }
+                }
+            }
+        }
+        
+        return matriz;
+    }
+    
+    public void imprimirMatriz(){
+        int matriz[][] = retornarMatriz();
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                switch (matriz[i][j]) {
+                    case CODIGO_CONECTOR:
+                        System.out.println("En la posición x: "+i+" y: "+j+ " hay un conector.");
+                        break;
+                    case CODIGO_ARMERIA:
+                        System.out.println("En la posición x: "+i+" y: "+j+ " hay una armeria.");
+                        break;
+                    case CODIGO_MINA:
+                        System.out.println("En la posición x: "+i+" y: "+j+ " hay una mina.");
+                        break;
+                    case CODIGO_TEMPLO_BRUJA:
+                        System.out.println("En la posición x: "+i+" y: "+j+ " hay un templo de brujas.");
+                        break;
+                    case CODIGO_FUENTE:
+                        System.out.println("En la posición x: "+i+" y: "+j+ " hay una fuente.");
+                        break;    
+                    default:
+                        //System.out.println("En la posición x: "+i+" y: "+j+ " hay un .");
+                        break;
+                }
+            }
+        }
     }
 }

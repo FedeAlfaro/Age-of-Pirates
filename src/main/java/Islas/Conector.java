@@ -21,6 +21,46 @@ public class Conector {
         visible = false;
         usado = false;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isUsado() {
+        return usado;
+    }
+
+    public void setUsado(boolean usado) {
+        this.usado = usado;
+    }
+
+    public Vertice getFin() {
+        return fin;
+    }
+
+    public void setFin(Vertice fin) {
+        this.fin = fin;
+    }
     
     public void mostrar(){
         visible = true;

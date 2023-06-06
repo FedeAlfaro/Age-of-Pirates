@@ -12,7 +12,6 @@ Mapa\Grafo.class
 Communication\Package.class
 General\AgeOfPirates.class
 Modelo\Modelo.class
-Armas\Precios.class
 General\IConstants.class
 Armas\Cannon.class
 Armas\Arma.class
