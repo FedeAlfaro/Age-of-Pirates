@@ -5,6 +5,7 @@
 package General;
 
 import Fabricas.FuenteEnergia;
+import Interfaz.EspacioDeJuego;
 import Islas.*;
 
 /**
@@ -27,6 +28,10 @@ public class AgeOfPirates {
         g.agregarFabrica(7,7,6,0,0);
         
         g.imprimirMatriz2();
+        
+        EspacioDeJuego pantalla = new EspacioDeJuego();
+        
+        pantalla.setVisible(true);
         /*
         g.agregarArista(g.buscarVertice(0), g.buscarVertice(2));
         g.agregarArista(g.buscarVertice(2), g.buscarVertice(0));
