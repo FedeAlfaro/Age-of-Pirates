@@ -38,9 +38,10 @@ public interface IConstants {
     
     public static final int TAMANO_MATRIZ = 20;
     
-    public static final int CODIGO_FUENTE = 0;
+    public static final int CODIGO_FUENTE = 1;
     public static final int CODIGO_CONECTOR = -1;
     public static final int CODIGO_ARMERIA = -2;
     public static final int CODIGO_MINA = -3;
     public static final int CODIGO_TEMPLO_BRUJA = -4;
+    public static final int CODIGO_DISPARO = -5;
 }

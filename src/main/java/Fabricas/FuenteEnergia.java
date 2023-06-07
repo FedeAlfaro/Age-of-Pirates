@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Islas;
+package Fabricas;
 
 import General.IConstants;
 
@@ -10,15 +10,15 @@ import General.IConstants;
  *
  * @author Usuario
  */
-public class FuenteEnergia implements IConstants{
+public class FuenteEnergia extends Fabrica implements IConstants{
     private int costo;
-    private int x;
-    private int y;
 
     public FuenteEnergia(int x, int y) {
+        super(x,y,0);
         this.costo = PRECIO_FUENTE_ENERGIA;
         this.x = x;
         this.y = y;
+        this.nombre = "Fuente de energia";
     }
 
     public int getCosto() {

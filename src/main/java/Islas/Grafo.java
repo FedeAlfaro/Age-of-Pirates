@@ -4,7 +4,8 @@
  */
 package Islas;
 
-import Fabricas.Fabrica;
+import Fabricas.*;
+import static Fabricas.Enum.ORIENTACION.*;
 import General.IConstants;
 import java.util.ArrayList;
 
@@ -16,16 +17,72 @@ import java.util.ArrayList;
 public class Grafo implements IConstants{
 
     ArrayList<Vertice> vertices;
-    FuenteEnergia fuente;
+    int matriz[][];
 
-    public Grafo(FuenteEnergia _fuente)
+    public Grafo()
     {
         vertices = new ArrayList<Vertice>();
-        fuente = _fuente;
+        matriz = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
+
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
+                matriz[i][j] = 0;
+            }
+        }
     }
 
+    public void agregarFuente(int IDvertice,int x,int y){
+        agregarVertice(IDvertice);
+        Fabrica fuente = new FuenteEnergia(x,y);
+        matriz[x][y] = CODIGO_FUENTE;
+        matriz[x+1][y] = CODIGO_FUENTE;
+        matriz[x][y+1] = CODIGO_FUENTE;
+        matriz[x+1][y+1] = CODIGO_FUENTE;
+    }
+    
+    public void agregarFabrica(int IDvertice,int x,int y, int orientacion, int tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
+        agregarVertice(IDvertice);                                                      //vertical(0), horizontal(1)
+        Vertice vertice = buscarVertice(IDvertice);
+
+        switch (tipoFabrica) {
+            case 0:
+                Fabrica mina = new Mina(x,y,orientacion);
+                vertice.fabrica = mina;
+                matriz[x][y] = CODIGO_MINA;
+                if(orientacion == 0){
+                    matriz[x][y+1] = CODIGO_MINA;
+                }else if(orientacion == 1){
+                    matriz[x+1][y] = CODIGO_MINA;
+                }
+                break;
+            case 1:
+                Fabrica armeria = new Armeria(x,y,orientacion);
+                vertice.fabrica = armeria;
+                matriz[x][y] = CODIGO_ARMERIA;
+                if(orientacion == 0){
+                    matriz[x][y+1] = CODIGO_ARMERIA;
+                }else if(orientacion == 1){
+                    matriz[x+1][y] = CODIGO_ARMERIA;
+                }
+                break;
+            case 2:
+                Fabrica templo = new TemploBruja(x,y,orientacion);
+                vertice.fabrica = templo;
+                matriz[x][y] = CODIGO_TEMPLO_BRUJA;
+                if(orientacion == 0){
+                    matriz[x][y+1] = CODIGO_TEMPLO_BRUJA;
+                }else if(orientacion == 1){
+                    matriz[x+1][y] = CODIGO_TEMPLO_BRUJA;
+                }
+                break;
+            default:
+                System.out.println("Opción de fábrica no válida");
+                break;
+        }
+    }
+    
     // agrega a la lista
-    public void agregarVertice(int valor)
+    private void agregarVertice(int valor)
     {
         vertices.add(new Vertice(valor));
     }
@@ -92,6 +149,10 @@ public class Grafo implements IConstants{
         }
 
         vertices.remove(v);
+    }
+    
+    public void eliminarFuente(){
+        vertices.get(0).fabrica = null;
     }
 
 
@@ -257,10 +318,10 @@ public class Grafo implements IConstants{
     }
     
     public boolean finalizar(){
-        if(fuente==null){ 
-            if(vertices.isEmpty()){
-                return true;
-            }
+        if(vertices.isEmpty()){
+            return true;
+            
+        }else if( vertices.get(0).fabrica == null){
             vertices.stream().forEach(p->p.mostrarTodo() );
         }
         return false;
@@ -280,11 +341,11 @@ public class Grafo implements IConstants{
                     matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
                 }else if(vertices.get(i).fabrica.getNombre() == "Templo de brujas"){
                     matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                }else if(vertices.get(i).fabrica.getNombre() == "Fuente de energia"){
+                    matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_FUENTE;
                 }
             }
-            if(fuente!=null){
-                matriz[fuente.getX()][fuente.getY()] = CODIGO_FUENTE;
-            }
+            
         }
         
         return matriz;
@@ -342,4 +403,52 @@ public class Grafo implements IConstants{
             }
         }
     }
+    
+    public void imprimirMatriz2(){
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print(matriz[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+    
+    
+    public void verificarFabricaDisparo(){
+        for(int i=0;i<vertices.size();i++){
+            if(vertices.get(i).fabrica.getOrientacion()==VERTICAL){
+                if(matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()]==CODIGO_DISPARO 
+                        && matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()+1]==CODIGO_DISPARO){
+                    
+                    vertices.get(i).fabrica = null; //se elimina del grafo pero no de las aristas
+                    
+                    for(int j=0;j< vertices.get(i).aristas.size();j++){
+                        if (vertices.get(i).dato == vertices.get(i).aristas.get(j).dato){
+                            
+                            vertices.get(i).aristas.get(j).fabrica = null; //se elimina de la arista
+                        }    
+                    }
+                    
+                    
+                }
+            }else if(vertices.get(i).fabrica.getOrientacion()==HORIZONTAL){
+                if(matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()]==CODIGO_DISPARO 
+                        && matriz[vertices.get(i).fabrica.getX()+1][vertices.get(i).fabrica.getY()]==CODIGO_DISPARO){
+                    
+                    vertices.get(i).fabrica = null;
+                    
+                    for(int j=0;j< vertices.get(i).aristas.size();j++){
+                        if (vertices.get(i).dato == vertices.get(i).aristas.get(j).dato){ 
+                            
+                            vertices.get(i).aristas.get(j).fabrica = null;
+                        }    
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    
 }
