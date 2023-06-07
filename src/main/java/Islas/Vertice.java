@@ -44,13 +44,15 @@ public class Vertice {
         this.fabrica = _fabrica;
     }
 
+    /*
     public void agregarArista (Vertice arista)
     {
         // si no está la arista para no repetir
         if (buscarArista(arista) == -1)
             aristas.add(new Vertice(arista.dato));
     }
-    
+    */
+     
     public void agregarArista (Vertice arista, int peso)
     {
         // si no está la arista para no repetir
@@ -58,12 +60,22 @@ public class Vertice {
             aristas.add(new Vertice(arista.dato, peso));
     }
     
-    public boolean agregarArista (Vertice arista, Fabrica _fabrica)
+    public boolean agregarArista (Vertice arista)
     {
         if(buscarArista(arista) == -1){
             // si no está la arista para no repetir
             if (conectores.stream().anyMatch(p->p.conectar(arista)))
-                aristas.add(new Vertice(arista.dato, _fabrica));
+                aristas.add(new Vertice(arista.dato, arista.fabrica));
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean agregarConector (Vertice arista)
+    {
+        if(buscarArista(arista) == -1){
+            // si no está la arista para no repetir
+            if (conectores.stream().anyMatch(p->p.conectar(arista)))
                 return true;
         }
         return false;

@@ -4,17 +4,19 @@
  */
 package Islas;
 
+import General.IConstants;
+
 /**
  *
  * @author Usuario
  */
-public class FuenteEnergia {
+public class FuenteEnergia implements IConstants{
     private int costo;
     private int x;
     private int y;
 
-    public FuenteEnergia(int costo, int x, int y) {
-        this.costo = costo;
+    public FuenteEnergia(int x, int y) {
+        this.costo = PRECIO_FUENTE_ENERGIA;
         this.x = x;
         this.y = y;
     }

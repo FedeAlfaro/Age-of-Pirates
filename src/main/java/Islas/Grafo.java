@@ -30,12 +30,14 @@ public class Grafo implements IConstants{
         vertices.add(new Vertice(valor));
     }
 
+    /*
     // agrega las aristas
     public void agregarArista(Vertice origen, Vertice destino)
     {
         if (origen != null && destino != null)
             origen.agregarArista(destino);
     }
+    */
 
     // agrega las aristas con peso
     public void agregarArista(Vertice origen, Vertice destino, int peso)
@@ -45,10 +47,10 @@ public class Grafo implements IConstants{
     }
     
     // agrega las aristas con peso
-    public boolean agregarArista(Vertice origen, Vertice destino, Fabrica fabrica)
+    public boolean agregarArista(Vertice origen, Vertice destino)
     {
         if (origen != null && destino != null){
-            return origen.agregarArista(destino, fabrica);
+            return origen.agregarArista(destino);
         }
         return false;
     }
