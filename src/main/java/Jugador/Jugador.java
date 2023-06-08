@@ -5,7 +5,7 @@
 package Jugador;
 
 import General.IConstants;
-import Mapa.*;
+import Islas.*;
 
 /**
  *
@@ -18,18 +18,26 @@ public class Jugador implements IConstants{
     private Inventario inventario;
     private int dinero;
     private boolean vivo;
-    private String username;
+    private int id;
     
     // Constructor
-    public Jugador(Grafo mapa, String username) {
+    public Jugador(int id) {
         vivo = true;
         dinero = DINERO_INICIAL;
-        this.mapa = mapa;
+        this.mapa = new Grafo();
         this.inventario = new Inventario();
-        this.username = username; 
+        this.id = id; 
     }
     
     // Gets y sets
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Grafo getMapa() {
         return mapa;
     }
@@ -60,13 +68,5 @@ public class Jugador implements IConstants{
 
     public void setVivo(boolean vivo) {
         this.vivo = vivo;
-    }
-    
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

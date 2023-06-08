@@ -14,10 +14,44 @@ import Mapa.Grafo;
  */
 public abstract class Arma implements IConstants{
     
-    public int targetX;
-    public int targetY;
-    public int coste;
+    // Atributos
+    protected int targetX;
+    protected int targetY;
+    protected int coste;
     
-    public abstract void atacar(Grafo atacando, Grafo victima);
+    // Constructor
+    public Arma(int targetX, int targetY, int coste) {
+        this.targetX = targetX;
+        this.targetY = targetY;
+        this.coste = coste;
+    }
+    
+    // Sets y gets
+    public int getTargetX() {
+        return targetX;
+    }
+
+    public void setTargetX(int targetX) {
+        this.targetX = targetX;
+    }
+
+    public int getTargetY() {
+        return targetY;
+    }
+
+    public void setTargetY(int targetY) {
+        this.targetY = targetY;
+    }
+    
+    public int getCoste() {
+        return coste;
+    }
+
+    public void setCoste(int coste) {
+        this.coste = coste;
+    }
+    
+    // Métodos
+    public abstract void atacar(Jugador atacante, Jugador defensor);
     
 }

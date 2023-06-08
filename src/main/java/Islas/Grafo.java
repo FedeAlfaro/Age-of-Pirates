@@ -30,6 +30,12 @@ public class Grafo implements IConstants{
             }
         }
     }
+    
+    public Grafo()
+    {
+        vertices = new ArrayList<Vertice>();
+        fuente = null;
+    }
 
     public void agregarFuente(int IDvertice,int x,int y){
         agregarVertice(IDvertice);
