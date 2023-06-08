@@ -15,7 +15,6 @@ public class Vertice {
     public int dato;
     boolean visitado;
     ArrayList<Vertice> aristas;
-    ArrayList<Conector> conectores;
     int peso;//peso
     Fabrica fabrica;
 
@@ -23,7 +22,6 @@ public class Vertice {
     public Vertice(int dato)
     {
         aristas = new ArrayList<Vertice>();
-        conectores = new ArrayList<Conector>();
         this.dato = dato;
         this.visitado = false;
     }
@@ -41,6 +39,14 @@ public class Vertice {
         aristas = new ArrayList<Vertice>();
         this.dato = dato;
         this.visitado = false;
+        this.fabrica = _fabrica;
+    }
+    
+    public Vertice(int dato, Fabrica _fabrica, boolean _visitado)
+    {
+        aristas = new ArrayList<Vertice>();
+        this.dato = dato;
+        this.visitado = _visitado;
         this.fabrica = _fabrica;
     }
 
@@ -64,19 +70,8 @@ public class Vertice {
     {
         if(buscarArista(arista) == -1){
             // si no está la arista para no repetir
-            if (conectores.stream().anyMatch(p->p.conectar(arista)))
-                aristas.add(new Vertice(arista.dato, arista.fabrica));
-                return true;
-        }
-        return false;
-    }
-    
-    public boolean agregarConector (Vertice arista)
-    {
-        if(buscarArista(arista) == -1){
-            // si no está la arista para no repetir
-            if (conectores.stream().anyMatch(p->p.conectar(arista)))
-                return true;
+            aristas.add(new Vertice(arista.dato, arista.fabrica,arista.visitado));
+            return true;
         }
         return false;
     }
@@ -90,9 +85,5 @@ public class Vertice {
         return -1;
     }
     
-    public void mostrarTodo(){
-        conectores.stream().forEach(p->p.mostrar());
-        fabrica.mostrar();
-    }
 }
 

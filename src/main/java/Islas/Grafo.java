@@ -18,11 +18,13 @@ public class Grafo implements IConstants{
 
     ArrayList<Vertice> vertices;
     int matriz[][];
+    ArrayList<Conector> conectores;
 
     public Grafo()
     {
         vertices = new ArrayList<Vertice>();
         matriz = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        conectores = new ArrayList<Conector>();
 
         for (int i = 0; i < TAMANO_MATRIZ; i++) {
             for (int j = 0; j < TAMANO_MATRIZ; j++) {
@@ -41,7 +43,7 @@ public class Grafo implements IConstants{
     }
     
     public void agregarFabrica(int IDvertice,int x,int y, int orientacion, int tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
-        agregarVertice(IDvertice);                                                      //vertical(0), horizontal(1)
+        agregarVertice(IDvertice);                                                      //0vertical(0), horizontal(1)
         Vertice vertice = buscarVertice(IDvertice);
 
         switch (tipoFabrica) {
@@ -103,12 +105,11 @@ public class Grafo implements IConstants{
             origen.agregarArista(destino, peso);
     }
     
-    // agrega las aristas con peso
     public boolean agregarArista(Vertice origen, Vertice destino)
     {
-        if (origen != null && destino != null){
-            return origen.agregarArista(destino);
-        }
+            if (origen != null && destino != null){
+                return origen.agregarArista(destino);
+            }
         return false;
     }
 
@@ -322,18 +323,18 @@ public class Grafo implements IConstants{
             return true;
             
         }else if( vertices.get(0).fabrica == null){
-            vertices.stream().forEach(p->p.mostrarTodo() );
+            vertices.stream().forEach(p->p.fabrica.mostrar() );
         }
         return false;
     }
     
     public int[][] retornarMatriz(){ //-1 conector 
         int matriz[][] = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
-        for(int i=0;i<vertices.size();i++){
-            for(int j=0;j< vertices.get(i).conectores.size();j++){
-                Conector conector = vertices.get(i).conectores.get(j);
-                matriz[conector.getX()][conector.getY()] = CODIGO_CONECTOR;
-            }
+        for(int i=0;i<conectores.size();i++){
+            
+            Conector conector = conectores.get(i);
+            matriz[conector.getX()][conector.getY()] = CODIGO_CONECTOR;
+            
             if(vertices.get(i).fabrica!=null){
                 if(vertices.get(i).fabrica.getNombre() == "Armeria"){
                     matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
@@ -352,35 +353,35 @@ public class Grafo implements IConstants{
     }
     
     public int[][] retornarMatrizVisible(){ //-1 conector 
-        int matriz[][] = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        int matrizAux[][] = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
         for(int i=0;i<vertices.size();i++){
-            for(int j=0;j< vertices.get(i).conectores.size();j++){
-                Conector conector = vertices.get(i).conectores.get(j);
-                if(conector.isVisible()){
-                    matriz[conector.getX()][conector.getY()] = CODIGO_CONECTOR;
-                }
+           
+            Conector conector = conectores.get(i);
+            if(conector.isVisible()){
+                matrizAux[conector.getX()][conector.getY()] = CODIGO_CONECTOR;
             }
+            
             if(vertices.get(i).fabrica!=null){
                 if(vertices.get(i).fabrica.isVisible()){
                     if(vertices.get(i).fabrica.getNombre() == "Armeria"){
-                        matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
+                        matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
                     }else if(vertices.get(i).fabrica.getNombre() == "Mina"){
-                        matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
+                        matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
                     }else if(vertices.get(i).fabrica.getNombre() == "Templo de brujas"){
-                        matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                        matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
                     }
                 }
             }
         }
         
-        return matriz;
+        return matrizAux;
     }
     
     public void imprimirMatriz(){
-        int matriz[][] = retornarMatriz();
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                switch (matriz[i][j]) {
+        int matrizAux[][] = retornarMatriz();
+        for (int i = 0; i < matrizAux.length; i++) {
+            for (int j = 0; j < matrizAux[i].length; j++) {
+                switch (matrizAux[i][j]) {
                     case CODIGO_CONECTOR:
                         System.out.println("En la posición x: "+i+" y: "+j+ " hay un conector.");
                         break;
