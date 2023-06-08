@@ -5,6 +5,7 @@
 package Interfaz;
 
 
+import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JButton;
 /**
@@ -21,7 +22,10 @@ public class EspacioDeJuego extends javax.swing.JFrame {
         btnsMapa = new JButton[20][20];
         initComponents();
         initMapa();
-        initMapaEnemigo();
+        initMapaEnemigo1();
+        initMapaEnemigo2();
+        initMapaEnemigo3();
+        initMapaEnemigo4();
     }
     
     public void initMapa(){
@@ -42,16 +46,73 @@ public class EspacioDeJuego extends javax.swing.JFrame {
         }
     }
     
-    public void initMapaEnemigo(){
+    public void initMapaEnemigo1(){
         Point puntoInicial = new Point(50,0);
         
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
                 JButton btn = new JButton();
-                panelMapaEnemigo.add(btn);
+                panelMapaEnemigo1.add(btn);
                 btn.setLocation(referencia);
                 btn.setSize(tamano,tamano);
+                //btnsMapa[i][j] = btn;
+                //btn.addActionListener(new MapActionListener(this, j, i));
+                //if (i < 2 || i > 22 || j < 2 || j > 22)
+                    //btn.setEnabled(false);
+            }
+        }
+    }
+    
+    public void initMapaEnemigo2(){
+        Point puntoInicial = new Point(50,0);
+        
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
+                JButton btn = new JButton();
+                panelMapaEnemigo2.add(btn);
+                btn.setLocation(referencia);
+                btn.setSize(tamano,tamano);
+                btn.setBackground(Color.red);
+                //btnsMapa[i][j] = btn;
+                //btn.addActionListener(new MapActionListener(this, j, i));
+                //if (i < 2 || i > 22 || j < 2 || j > 22)
+                    //btn.setEnabled(false);
+            }
+        }
+    }
+    
+    public void initMapaEnemigo3(){
+        Point puntoInicial = new Point(50,0);
+        
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
+                JButton btn = new JButton();
+                panelMapaEnemigo3.add(btn);
+                btn.setLocation(referencia);
+                btn.setSize(tamano,tamano);
+                btn.setBackground(Color.BLUE);
+                //btnsMapa[i][j] = btn;
+                //btn.addActionListener(new MapActionListener(this, j, i));
+                //if (i < 2 || i > 22 || j < 2 || j > 22)
+                    //btn.setEnabled(false);
+            }
+        }
+    }
+    
+    public void initMapaEnemigo4(){
+        Point puntoInicial = new Point(50,0);
+        
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
+                JButton btn = new JButton();
+                panelMapaEnemigo4.add(btn);
+                btn.setLocation(referencia);
+                btn.setSize(tamano,tamano);
+                btn.setBackground(Color.GREEN);
                 //btnsMapa[i][j] = btn;
                 //btn.addActionListener(new MapActionListener(this, j, i));
                 //if (i < 2 || i > 22 || j < 2 || j > 22)
@@ -73,11 +134,15 @@ public class EspacioDeJuego extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         btn_Send = new javax.swing.JButton();
         lbl_Chat = new javax.swing.JLabel();
-        panelMapaEnemigo = new javax.swing.JPanel();
         panelSucesos = new javax.swing.JPanel();
         lbl_Sucesos = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        panelMapaEnemigo1 = new javax.swing.JPanel();
+        panelMapaEnemigo2 = new javax.swing.JPanel();
+        panelMapaEnemigo3 = new javax.swing.JPanel();
+        panelMapaEnemigo4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,7 +156,7 @@ public class EspacioDeJuego extends javax.swing.JFrame {
         );
         panelMapaLayout.setVerticalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         panelChat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -129,19 +194,6 @@ public class EspacioDeJuego extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        panelMapaEnemigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout panelMapaEnemigoLayout = new javax.swing.GroupLayout(panelMapaEnemigo);
-        panelMapaEnemigo.setLayout(panelMapaEnemigoLayout);
-        panelMapaEnemigoLayout.setHorizontalGroup(
-            panelMapaEnemigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 703, Short.MAX_VALUE)
-        );
-        panelMapaEnemigoLayout.setVerticalGroup(
-            panelMapaEnemigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
-        );
-
         panelSucesos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lbl_Sucesos.setText("Sucesos");
@@ -152,7 +204,7 @@ public class EspacioDeJuego extends javax.swing.JFrame {
             panelSucesosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSucesosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_Sucesos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_Sucesos, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelSucesosLayout.setVerticalGroup(
@@ -169,6 +221,60 @@ public class EspacioDeJuego extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jLabel2.setText("Enemy");
 
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout panelMapaEnemigo1Layout = new javax.swing.GroupLayout(panelMapaEnemigo1);
+        panelMapaEnemigo1.setLayout(panelMapaEnemigo1Layout);
+        panelMapaEnemigo1Layout.setHorizontalGroup(
+            panelMapaEnemigo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 703, Short.MAX_VALUE)
+        );
+        panelMapaEnemigo1Layout.setVerticalGroup(
+            panelMapaEnemigo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Enemy P1", panelMapaEnemigo1);
+
+        javax.swing.GroupLayout panelMapaEnemigo2Layout = new javax.swing.GroupLayout(panelMapaEnemigo2);
+        panelMapaEnemigo2.setLayout(panelMapaEnemigo2Layout);
+        panelMapaEnemigo2Layout.setHorizontalGroup(
+            panelMapaEnemigo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 703, Short.MAX_VALUE)
+        );
+        panelMapaEnemigo2Layout.setVerticalGroup(
+            panelMapaEnemigo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Enemy P2", panelMapaEnemigo2);
+
+        javax.swing.GroupLayout panelMapaEnemigo3Layout = new javax.swing.GroupLayout(panelMapaEnemigo3);
+        panelMapaEnemigo3.setLayout(panelMapaEnemigo3Layout);
+        panelMapaEnemigo3Layout.setHorizontalGroup(
+            panelMapaEnemigo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 703, Short.MAX_VALUE)
+        );
+        panelMapaEnemigo3Layout.setVerticalGroup(
+            panelMapaEnemigo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Enemy P3", panelMapaEnemigo3);
+
+        javax.swing.GroupLayout panelMapaEnemigo4Layout = new javax.swing.GroupLayout(panelMapaEnemigo4);
+        panelMapaEnemigo4.setLayout(panelMapaEnemigo4Layout);
+        panelMapaEnemigo4Layout.setHorizontalGroup(
+            panelMapaEnemigo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 703, Short.MAX_VALUE)
+        );
+        panelMapaEnemigo4Layout.setVerticalGroup(
+            panelMapaEnemigo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Enemy P4", panelMapaEnemigo4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,11 +287,11 @@ public class EspacioDeJuego extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(panelMapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(panelMapaEnemigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTabbedPane1))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(panelChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(panelSucesos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(panelSucesos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,10 +306,10 @@ public class EspacioDeJuego extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelMapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelMapaEnemigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelMapa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelChat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,12 +359,16 @@ public class EspacioDeJuego extends javax.swing.JFrame {
     private javax.swing.JButton btn_Send;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_Chat;
     private javax.swing.JLabel lbl_Sucesos;
     private javax.swing.JPanel panelChat;
     private javax.swing.JPanel panelMapa;
-    private javax.swing.JPanel panelMapaEnemigo;
+    private javax.swing.JPanel panelMapaEnemigo1;
+    private javax.swing.JPanel panelMapaEnemigo2;
+    private javax.swing.JPanel panelMapaEnemigo3;
+    private javax.swing.JPanel panelMapaEnemigo4;
     private javax.swing.JPanel panelSucesos;
     // End of variables declaration//GEN-END:variables
 }
