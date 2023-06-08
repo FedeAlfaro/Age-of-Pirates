@@ -4,28 +4,45 @@
  */
 package Armas;
 
+import Jugador.Jugador;
 import Mapa.Grafo;
 import java.util.Random;
+import Fabricas.Enum.ORIENTACION;
 
 /**
  *
  * @author sotic
  */
-public class Bomba extends Arma{
+public class Bomba extends Arma {
     
-    private boolean horizontal;
-    
+    // Atributos
+    private ORIENTACION orientacion;
+
     // Construtor
-    public Bomba(int targetX, int targetY){
-        this.targetX = targetX;
-        this.targetY = targetY;
-        this.coste = PRECIO_CANNON;
-        this.horizontal = new Random().nextBoolean(); 
+    public Bomba(){
+        super(-1, -1, PRECIO_BOMBA);
+        this.orientacion = ORIENTACION.values()[0];
     }
+    
+    public Bomba(int targetX, int targetY, int orientacion){
+        super(targetX, targetY, PRECIO_BOMBA);
+        this.orientacion = ORIENTACION.values()[orientacion];
+    }
+    
+    // Gets y sets
+    public ORIENTACION getOrientacion() {
+        return orientacion;
+    }
+
+    public void setOrientacion(ORIENTACION orientacion) {
+        this.orientacion = orientacion;
+    }
+    
     
     // Métodos
     @Override
-    public void atacar(Grafo atacando, Grafo victima) {
+    public void atacar(Jugador atacando, Jugador victima) {
+        /*
         victima.atacarVertice(targetX, targetY, coste);
         if (horizontal){
             victima.atacarVertice(targetX, targetY+1, coste);
@@ -33,6 +50,7 @@ public class Bomba extends Arma{
         else{
             victima.atacarVertice(targetX+1, targetY, coste);
         }
+ */
     }
     
 }

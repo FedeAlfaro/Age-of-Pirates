@@ -4,6 +4,7 @@
  */
 package Armas;
 
+import Jugador.Jugador;
 import Mapa.Grafo;
 
 /**
@@ -13,16 +14,17 @@ import Mapa.Grafo;
 public class CannonMultiple extends Arma{
     
     // Construtor
+    public CannonMultiple(){
+        super(-1, -1, PRECIO_CANNONMULTIPLE);
+    }
+    
     public CannonMultiple(int targetX, int targetY){
-        this.targetX = targetX;
-        this.targetY = targetY;
-        this.coste = PRECIO_CANNONMULTIPLE;
+        super(-1, -1, PRECIO_CANNONMULTIPLE);
     }
     
     // Métodos
     @Override
-    public void atacar(Grafo atacando, Grafo victima) {
-        victima.atacarVertice(targetX, targetY, coste);
+    public void atacar(Jugador atacando, Jugador victima) {
         // Más lógica
     }
     
