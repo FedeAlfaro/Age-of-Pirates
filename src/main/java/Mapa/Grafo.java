@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Grafo {
     
-    private int matriz[][];
+    public int matriz[][];
     private Vertice vertices[];
     private int cantidadVertices = 0;
     private int max;

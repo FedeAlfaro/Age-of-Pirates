@@ -191,6 +191,7 @@
         <Component class="javax.swing.JLabel" name="lbl_Sucesos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sucesos"/>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>

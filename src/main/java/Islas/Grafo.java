@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Grafo implements IConstants{
 
     ArrayList<Vertice> vertices;
-    int matriz[][];
+    public int matriz[][];
     ArrayList<Conector> conectores;
 
     public Grafo()
@@ -42,45 +42,49 @@ public class Grafo implements IConstants{
         matriz[x+1][y+1] = CODIGO_FUENTE;
     }
     
-    public void agregarFabrica(int IDvertice,int x,int y, int orientacion, int tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
-        agregarVertice(IDvertice);                                                      //0vertical(0), horizontal(1)
-        Vertice vertice = buscarVertice(IDvertice);
+    public boolean agregarFabrica(int IDvertice,int x,int y, int orientacion, int tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
+        if(verificarEspacioFabrica(x,y, orientacion)){
+            agregarVertice(IDvertice);                                                      //0vertical(0), horizontal(1)
+            Vertice vertice = buscarVertice(IDvertice);
 
-        switch (tipoFabrica) {
-            case 0:
-                Fabrica mina = new Mina(x,y,orientacion);
-                vertice.fabrica = mina;
-                matriz[x][y] = CODIGO_MINA;
-                if(orientacion == 0){
-                    matriz[x][y+1] = CODIGO_MINA;
-                }else if(orientacion == 1){
-                    matriz[x+1][y] = CODIGO_MINA;
-                }
-                break;
-            case 1:
-                Fabrica armeria = new Armeria(x,y,orientacion);
-                vertice.fabrica = armeria;
-                matriz[x][y] = CODIGO_ARMERIA;
-                if(orientacion == 0){
-                    matriz[x][y+1] = CODIGO_ARMERIA;
-                }else if(orientacion == 1){
-                    matriz[x+1][y] = CODIGO_ARMERIA;
-                }
-                break;
-            case 2:
-                Fabrica templo = new TemploBruja(x,y,orientacion);
-                vertice.fabrica = templo;
-                matriz[x][y] = CODIGO_TEMPLO_BRUJA;
-                if(orientacion == 0){
-                    matriz[x][y+1] = CODIGO_TEMPLO_BRUJA;
-                }else if(orientacion == 1){
-                    matriz[x+1][y] = CODIGO_TEMPLO_BRUJA;
-                }
-                break;
-            default:
-                System.out.println("Opción de fábrica no válida");
-                break;
+            switch (tipoFabrica) {
+                case 0:
+                    Fabrica mina = new Mina(x,y,orientacion);
+                    vertice.fabrica = mina;
+                    matriz[x][y] = CODIGO_MINA;
+                    if(orientacion == 0){
+                        matriz[x][y+1] = CODIGO_MINA;
+                    }else if(orientacion == 1){
+                        matriz[x+1][y] = CODIGO_MINA;
+                    }
+                    break;
+                case 1:
+                    Fabrica armeria = new Armeria(x,y,orientacion);
+                    vertice.fabrica = armeria;
+                    matriz[x][y] = CODIGO_ARMERIA;
+                    if(orientacion == 0){
+                        matriz[x][y+1] = CODIGO_ARMERIA;
+                    }else if(orientacion == 1){
+                        matriz[x+1][y] = CODIGO_ARMERIA;
+                    }
+                    break;
+                case 2:
+                    Fabrica templo = new TemploBruja(x,y,orientacion);
+                    vertice.fabrica = templo;
+                    matriz[x][y] = CODIGO_TEMPLO_BRUJA;
+                    if(orientacion == 0){
+                        matriz[x][y+1] = CODIGO_TEMPLO_BRUJA;
+                    }else if(orientacion == 1){
+                        matriz[x+1][y] = CODIGO_TEMPLO_BRUJA;
+                    }
+                    break;
+                default:
+                    System.out.println("Opción de fábrica no válida");
+                    break;
+            }
+            return true;
         }
+        return false;
     }
     
     // agrega a la lista
@@ -449,7 +453,33 @@ public class Grafo implements IConstants{
         }
     }
     
+    //int IDvertice,int x,int y, int orientacion, int tipoFabrica
+    public boolean verificarEspacioFabrica(int x,int y, int orientacion){
+        if(orientacion == 0){
+            if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO ) 
+                    && ((matriz[x][y+1]==CODIGO_DISPARO || matriz[x][y+1]==0) || matriz[x][y+1] == CODIGO_REMOLINO )){
+                return true;
+            }
+        }else if(orientacion == 1){
+            if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO ) 
+                    && ((matriz[x+1][y]==CODIGO_DISPARO || matriz[x+1][y]==0) || matriz[x+1][y] == CODIGO_REMOLINO )){
+                return true;
+            }
+        }
+        return false;
+    }
     
+    public boolean verificarEspacioConector(int x,int y){
+        if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO )  ){
+            return true;
+        }
+        return false;
+    }
     
-    
+    public boolean verificarEspacioRemolino(int x,int y){
+        if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO )  ){
+            return true;
+        }
+        return false;
+    }
 }

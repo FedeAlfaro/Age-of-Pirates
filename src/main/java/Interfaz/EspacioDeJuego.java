@@ -5,120 +5,236 @@
 package Interfaz;
 
 
+import General.IConstants;
+import Islas.Grafo;
+import Jugador.Jugador;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JButton;
 /**
  *
  * @author USUARIO
  */
-public class EspacioDeJuego extends javax.swing.JFrame {
-    private JButton[][] btnsMapa;
+public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
+    private JButton[][] btnsMapa1;
+    private JButton[][] btnsMapa2;
+    private JButton[][] btnsMapa3;
+    private JButton[][] btnsMapa4;
+    private JButton[][] btnsMapa5;
     private final int tamano = 30;
+    ArrayList<Jugador> jugadores;
+    //Grafo g = new Grafo();
+    
     /**
      * Creates new form EspacioDeJuego
      */
     public EspacioDeJuego() {
-        btnsMapa = new JButton[20][20];
+        jugadores = new ArrayList<Jugador>();
+        
+        Jugador j0 = new Jugador(0);
+        Jugador j1 = new Jugador(1);
+        Jugador j2 = new Jugador(2);
+        Jugador j3 = new Jugador(3);
+        Jugador j4 = new Jugador(4);
+        
+        j1.getMapa().agregarFuente(0,15,15);
+        j1.getMapa().agregarFabrica(1,14,13,0,0);
+        j1.getMapa().agregarFabrica(2,13,12,0,0);
+        j1.getMapa().agregarFabrica(3,12,11,0,1);
+        j1.getMapa().agregarFabrica(3,11,10,0,1);
+        j1.getMapa().agregarFabrica(4,10,9,0,1);
+        j1.getMapa().agregarFabrica(5,9,8,0,2);
+        j1.getMapa().agregarFabrica(6,8,7,0,2);
+        j1.getMapa().agregarFabrica(7,7,6,0,0);   
+        
+        jugadores.add(j0);
+        jugadores.add(j1);
+        jugadores.add(j2);
+        jugadores.add(j3);
+        jugadores.add(j4);
+        
+        generarRemolinos();
+        
+        btnsMapa1 = new JButton[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        btnsMapa2 = new JButton[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        btnsMapa3 = new JButton[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        btnsMapa4 = new JButton[TAMANO_MATRIZ][TAMANO_MATRIZ];
+        btnsMapa5 = new JButton[TAMANO_MATRIZ][TAMANO_MATRIZ];
         initComponents();
         initMapa();
         initMapaEnemigo1();
         initMapaEnemigo2();
         initMapaEnemigo3();
         initMapaEnemigo4();
+        
+        int fontSize = 16; // Tamaño de la fuente
+        String fontName = "Open Sans"; // Nombre de la fuente
+
+        // Crea el objeto Font con el tamaño y la fuente recomendados
+        Font font = new Font(fontName, Font.PLAIN, fontSize);
+
+        // Asigna la fuente al JLabel lbl_Sucesos
+        lbl_Sucesos.setFont(font);
+        
+        lbl_Sucesos.setText("Se agregó la fuente en la posición x:"+"15"+" y: "+"15 \n");
+        lbl_Sucesos.setText(lbl_Sucesos.getText()+"Se agregó la fuente en la posición x:"+"15"+" y: "+"15");
+        
+    }
+    public void colorearMapa(Grafo g, JButton[][] btns){
+        Point puntoInicial = new Point(50,0);
+        
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
+                switch (g.matriz[j][i]) {
+                    case CODIGO_FUENTE:
+                        //Amarillo Fuente //Azul Conector //Anaranjado mina //Magenta Bruja //Plateado armeria //Rojo bala
+                        btns[i][j].setBackground(Color.YELLOW);
+                        break;
+                    case CODIGO_CONECTOR:
+                        btns[i][j].setBackground(Color.CYAN);
+                        break;
+                    case CODIGO_ARMERIA:
+                        btns[i][j].setBackground(Color.DARK_GRAY);
+                        break;
+                    case CODIGO_MINA:
+                        btns[i][j].setBackground(Color.ORANGE);
+                        break;
+                    case CODIGO_TEMPLO_BRUJA:
+                        btns[i][j].setBackground(Color.MAGENTA);
+                        break;
+                    case CODIGO_DISPARO:  
+                        btns[i][j].setBackground(Color.RED);
+                        break;
+                    case CODIGO_REMOLINO:  
+                        btns[i][j].setBackground(Color.BLUE);
+                        break;    
+                    default:
+                        break;
+                }
+                
+                
+            }
+        }
+    }
+    
+    public void generarRemolinos(){
+        Random random = new Random();
+        int x;
+        int y;
+        for(Jugador j: jugadores){
+            int contador = 0;
+            do{
+                x = random.nextInt(20);
+                y = random.nextInt(20);
+                if(j.getMapa().verificarEspacioRemolino(x, y)){
+                    j.getMapa().matriz[x][y] = CODIGO_REMOLINO;
+                    contador++;
+                }    
+            }while(contador<2);
+        }
     }
     
     public void initMapa(){
         Point puntoInicial = new Point(50,0);
         
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
                 JButton btn = new JButton();
                 panelMapa.add(btn);
                 btn.setLocation(referencia);
                 btn.setSize(tamano,tamano);
-                //btnsMapa[i][j] = btn;
+                btnsMapa1[i][j] = btn;
                 //btn.addActionListener(new MapActionListener(this, j, i));
                 //if (i < 2 || i > 22 || j < 2 || j > 22)
                     //btn.setEnabled(false);
+                    
+                    
             }
         }
+        colorearMapa(jugadores.get(0).getMapa(),btnsMapa1);
     }
     
     public void initMapaEnemigo1(){
         Point puntoInicial = new Point(50,0);
         
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
                 JButton btn = new JButton();
                 panelMapaEnemigo1.add(btn);
                 btn.setLocation(referencia);
                 btn.setSize(tamano,tamano);
-                //btnsMapa[i][j] = btn;
+                btnsMapa2[i][j] = btn;
                 //btn.addActionListener(new MapActionListener(this, j, i));
                 //if (i < 2 || i > 22 || j < 2 || j > 22)
                     //btn.setEnabled(false);
             }
         }
+        colorearMapa(jugadores.get(1).getMapa(),btnsMapa2);
     }
     
     public void initMapaEnemigo2(){
         Point puntoInicial = new Point(50,0);
         
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
                 JButton btn = new JButton();
                 panelMapaEnemigo2.add(btn);
                 btn.setLocation(referencia);
                 btn.setSize(tamano,tamano);
                 btn.setBackground(Color.red);
-                //btnsMapa[i][j] = btn;
+                btnsMapa3[i][j] = btn;
                 //btn.addActionListener(new MapActionListener(this, j, i));
                 //if (i < 2 || i > 22 || j < 2 || j > 22)
                     //btn.setEnabled(false);
             }
         }
+        colorearMapa(jugadores.get(2).getMapa(),btnsMapa3);
     }
     
     public void initMapaEnemigo3(){
         Point puntoInicial = new Point(50,0);
         
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
                 JButton btn = new JButton();
                 panelMapaEnemigo3.add(btn);
                 btn.setLocation(referencia);
                 btn.setSize(tamano,tamano);
                 btn.setBackground(Color.BLUE);
-                //btnsMapa[i][j] = btn;
+                btnsMapa4[i][j] = btn;
                 //btn.addActionListener(new MapActionListener(this, j, i));
                 //if (i < 2 || i > 22 || j < 2 || j > 22)
                     //btn.setEnabled(false);
             }
         }
+        colorearMapa(jugadores.get(3).getMapa(),btnsMapa4);
     }
     
     public void initMapaEnemigo4(){
         Point puntoInicial = new Point(50,0);
         
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 Point referencia = new Point((int)puntoInicial.getX() + ((tamano+1)*j), (int)puntoInicial.getY() + ((tamano+1)*i));
                 JButton btn = new JButton();
                 panelMapaEnemigo4.add(btn);
                 btn.setLocation(referencia);
                 btn.setSize(tamano,tamano);
                 btn.setBackground(Color.GREEN);
-                //btnsMapa[i][j] = btn;
+                btnsMapa5[i][j] = btn;
                 //btn.addActionListener(new MapActionListener(this, j, i));
                 //if (i < 2 || i > 22 || j < 2 || j > 22)
                     //btn.setEnabled(false);
             }
         }
+        colorearMapa(jugadores.get(4).getMapa(),btnsMapa5);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -198,6 +314,7 @@ public class EspacioDeJuego extends javax.swing.JFrame {
         panelSucesos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lbl_Sucesos.setText("Sucesos");
+        lbl_Sucesos.setName(""); // NOI18N
 
         javax.swing.GroupLayout panelSucesosLayout = new javax.swing.GroupLayout(panelSucesos);
         panelSucesos.setLayout(panelSucesosLayout);

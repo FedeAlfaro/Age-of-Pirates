@@ -44,4 +44,5 @@ public interface IConstants {
     public static final int CODIGO_MINA = -3;
     public static final int CODIGO_TEMPLO_BRUJA = -4;
     public static final int CODIGO_DISPARO = -5;
+    public static final int CODIGO_REMOLINO = -6;
 }
