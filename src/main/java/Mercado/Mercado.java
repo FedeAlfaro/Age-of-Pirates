@@ -18,14 +18,19 @@ public class Mercado {
     public static void comprar(Jugador jugadorTurno, Jugador jugadorLlamado, 
             Inventario intercambio, int dinero){ // Si se necesita, se puede 
                                                   // devolver un array de los dos Jugadores y luego asignarlos
-            // Lógica
-    
+        if (jugadorLlamado.getInventario().validaTransaccion(intercambio)){
+            jugadorTurno.getInventario().comprar(intercambio);
+            jugadorLlamado.getInventario().vender(intercambio);
+        }                                      
     }
     
     public static void vender(Jugador jugadorTurno, Jugador jugadorLlamado, 
             Inventario intercambio, int dinero){ // Si se necesita, se puede 
                                                   // devolver un array de los dos Jugadores y luego asignarlos
-            // Lógica
+        if (jugadorTurno.getInventario().validaTransaccion(intercambio)){
+            jugadorLlamado.getInventario().comprar(intercambio);
+            jugadorTurno.getInventario().vender(intercambio);
+        }     
     }
     
     public static void intercambio(Jugador jugadorTurno, Jugador jugadorLlamado, boolean comprar,
