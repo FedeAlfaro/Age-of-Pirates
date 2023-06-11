@@ -4,6 +4,8 @@
  */
 package Islas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
@@ -13,13 +15,14 @@ public class Conector {
     private int y;
     private boolean visible;
     private boolean usado;
-    private Vertice fin;
+    private ArrayList<Vertice> vertices;
     
     Conector(int _x,int _y){
         x = _x;
         y= _y;
         visible = false;
         usado = false;
+        vertices = new ArrayList<Vertice>();
     }
 
     public int getX() {
@@ -54,14 +57,14 @@ public class Conector {
         this.usado = usado;
     }
 
-    public Vertice getFin() {
-        return fin;
+    public ArrayList<Vertice> getVertices() {
+        return vertices;
     }
 
-    public void setFin(Vertice fin) {
-        this.fin = fin;
+    public void setVertices(ArrayList<Vertice> vertices) {
+        this.vertices = vertices;
     }
-    
+
     public void mostrar(){
         visible = true;
     }        
@@ -70,15 +73,19 @@ public class Conector {
         visible = false;
     }        
     
-    public boolean conectar(Vertice v2){
-        if(!usado && esAdyacenciente(v2.fabrica.getX(),v2.fabrica.getY(),v2.fabrica.getOrientacion().getValue()) ){
-            fin = v2;
-            usado = true;
+    public boolean conectar(Vertice v){
+        if(v.dato==0 && v.fabrica!=null){
+            if(esAdyacienteFabrica(v.fabrica.getX(),v.fabrica.getX()));
+                vertices.add(v);
+                return true;
+        }else if(esAdyaciente(v.fabrica.getX(),v.fabrica.getY(), v.fabrica.getOrientacion().getValue())){
+            vertices.add(v);
+            return true;
         }
-        return false;
+        return false;    
     }
     
-    public boolean esAdyacenciente(int _x,int _y, int orientacion){
+    public boolean esAdyaciente(int _x,int _y, int orientacion){
         if(orientacion == 0){  //vertical
             if(x-1==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
                 return true;
@@ -96,6 +103,21 @@ public class Conector {
                 return true;
             }
         }    
+        return false;
+    }
+    
+    public boolean esAdyacienteFabrica(int _x,int _y){
+        
+        if(x-2==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
+                return true;
+        }else if(x-1==_x && (y-1==_y || y+2 == _y)  ){
+            return true;
+        }else if(x==_x && (y+2 == _y || y==_y-1)  ){
+            return true;
+        }else if(x+1==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
+            return true;
+        }
+         
         return false;
     }
 }

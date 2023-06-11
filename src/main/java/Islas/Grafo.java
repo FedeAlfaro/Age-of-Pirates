@@ -95,11 +95,40 @@ public class Grafo implements IConstants{
         }
         return false;
     }
-    /*
+    
     public void conectarConectores(){
-        for(Conector)
+        for(Conector conector: conectores){
+            for(Vertice v: vertices){
+                conector.conectar(v);
+            }
+        }
+        visibilizar();
     }
-    */
+    
+    public void visibilizar(){
+        conectores.stream().forEach(p->p.setVisible(true));
+        for(Vertice v: vertices){
+            if(v.fabrica != null){
+                v.fabrica.mostrar();
+            }
+        }
+        if(vertices.get(0).fabrica!=null){
+            vertices.get(0).fabrica.noMostrar();
+        }
+        for(Conector conector:conectores){
+            if(vertices.get(0).fabrica !=null && conector.getVertices().stream().anyMatch(p->p.dato == 0)){
+                conector.noMostrar();
+                for(int i=0;i<conector.getVertices().size();i++){
+                    for(int j=0;i<vertices.size();j++){
+                        if(vertices.get(j)==conector.getVertices().get(i)){
+                            vertices.get(j).fabrica.noMostrar();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     // agrega a la lista
     private void agregarVertice(int valor)
     {
