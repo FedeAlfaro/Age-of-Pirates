@@ -87,6 +87,19 @@ public class Grafo implements IConstants{
         return false;
     }
     
+    public boolean agregarConector(int x,int y){
+        if(verificarEspacioConector(x,y)){
+            Conector conector = new Conector(x,y);
+            conectores.add(conector);
+            return true;
+        }
+        return false;
+    }
+    /*
+    public void conectarConectores(){
+        for(Conector)
+    }
+    */
     // agrega a la lista
     private void agregarVertice(int valor)
     {

@@ -26,12 +26,15 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private JButton[][] btnsMapa5;
     private final int tamano = 30;
     ArrayList<Jugador> jugadores;
+    int numeroVertice;
     //Grafo g = new Grafo();
     
     /**
      * Creates new form EspacioDeJuego
      */
     public EspacioDeJuego() {
+        numeroVertice = 0;
+        
         jugadores = new ArrayList<Jugador>();
         
         Jugador j0 = new Jugador(0);
@@ -83,6 +86,38 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         lbl_Sucesos.setText(lbl_Sucesos.getText()+"Se agregó la fuente en la posición x:"+"15"+" y: "+"15");
         
     }
+    
+    public boolean agregar(Jugador j, int x, int y, int orientacion, int tipoFabrica){
+        boolean resultado;
+        switch(tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
+            case 0: 
+                j.getMapa().agregarFuente(0, x, y);
+                resultado = true;
+                numeroVertice++;
+                break;
+            case 1:  //Mina
+                resultado = j.getMapa().agregarFabrica(numeroVertice, x, y, orientacion, 0);
+                numeroVertice++;        
+                break;
+            case 2:  //Armeria
+                resultado = j.getMapa().agregarFabrica(numeroVertice, x, y, orientacion, 1);
+                numeroVertice++;
+                break;
+            case 3: //Fabrica de brujas
+                resultado = j.getMapa().agregarFabrica(numeroVertice, x, y, orientacion, 2);
+                numeroVertice++;
+                break;
+            default:
+                resultado = false;
+                break;
+        }
+        return resultado;
+    }
+    
+    public boolean agregarConector(Jugador j,int x, int y){
+        return j.getMapa().agregarConector(x,y);
+    }
+    
     public void colorearMapa(Grafo g, JButton[][] btns){
         Point puntoInicial = new Point(50,0);
         
@@ -247,7 +282,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
 
         panelMapa = new javax.swing.JPanel();
         panelChat = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldMensaje = new javax.swing.JTextField();
         btn_Send = new javax.swing.JButton();
         lbl_Chat = new javax.swing.JLabel();
         panelSucesos = new javax.swing.JPanel();
@@ -290,15 +325,23 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
 
         panelChat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextField1.setText("Escriba su mensaje");
-        jTextField1.setName(""); // NOI18N
+        jTextFieldMensaje.setText("Escriba su mensaje");
+        jTextFieldMensaje.setName(""); // NOI18N
+        jTextFieldMensaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMensajeActionPerformed(evt);
+            }
+        });
 
         btn_Send.setBackground(new java.awt.Color(102, 102, 255));
         btn_Send.setForeground(new java.awt.Color(255, 255, 255));
         btn_Send.setText("SEND");
         btn_Send.setActionCommand("");
-
-        lbl_Chat.setText("chat");
+        btn_Send.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SendActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelChatLayout = new javax.swing.GroupLayout(panelChat);
         panelChat.setLayout(panelChatLayout);
@@ -309,7 +352,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
                 .addGroup(panelChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lbl_Chat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelChatLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Send)))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -321,7 +364,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
                 .addComponent(lbl_Chat, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(jTextFieldMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                     .addComponent(btn_Send, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
@@ -597,6 +640,18 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         
         pantallaMercado.setVisible(true);
     }//GEN-LAST:event_btnMercadoActionPerformed
+
+    private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
+        String mensaje = jTextFieldMensaje.getText();
+        if(!mensaje.isEmpty()){
+            lbl_Chat.setText(lbl_Chat.getText()+"\n"+mensaje);
+            jTextFieldMensaje.setText("");
+        }
+    }//GEN-LAST:event_btn_SendActionPerformed
+
+    private void jTextFieldMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMensajeActionPerformed
+         
+    }//GEN-LAST:event_jTextFieldMensajeActionPerformed
     
     /**
      * @param args the command line arguments
@@ -651,7 +706,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldMensaje;
     private javax.swing.JLabel lbl_Chat;
     private javax.swing.JLabel lbl_Sucesos;
     private javax.swing.JPanel panelChat;
