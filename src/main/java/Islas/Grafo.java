@@ -194,7 +194,7 @@ public class Grafo implements IConstants{
                     vertices.get(i).aristas.remove(j);
             }
         }
-
+        conectores.stream().forEach(p->p.eliminarVertice(v));
         vertices.remove(v);
     }
     
@@ -202,6 +202,9 @@ public class Grafo implements IConstants{
         vertices.get(0).fabrica = null;
     }
 
+    public void eliminarConector(){
+        
+    }
 
     // Recorrido PROFUNDIDAD
     public void profundidad()
@@ -467,30 +470,39 @@ public class Grafo implements IConstants{
                 if(matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()]==CODIGO_DISPARO 
                         && matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()+1]==CODIGO_DISPARO){
                     
-                    vertices.get(i).fabrica = null; //se elimina del grafo pero no de las aristas
-                    
+                    eliminar(vertices.get(i)); //se elimina del grafo pero no de las aristas
+                    /*
                     for(int j=0;j< vertices.get(i).aristas.size();j++){
                         if (vertices.get(i).dato == vertices.get(i).aristas.get(j).dato){
                             
                             vertices.get(i).aristas.get(j).fabrica = null; //se elimina de la arista
                         }    
                     }
-                    
+                    */
                     
                 }
             }else if(vertices.get(i).fabrica.getOrientacion()==HORIZONTAL){
                 if(matriz[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()]==CODIGO_DISPARO 
                         && matriz[vertices.get(i).fabrica.getX()+1][vertices.get(i).fabrica.getY()]==CODIGO_DISPARO){
                     
-                    vertices.get(i).fabrica = null;
-                    
+                    eliminar(vertices.get(i));
+                    /*
                     for(int j=0;j< vertices.get(i).aristas.size();j++){
                         if (vertices.get(i).dato == vertices.get(i).aristas.get(j).dato){ 
                             
                             vertices.get(i).aristas.get(j).fabrica = null;
                         }    
                     }
+                    */
                 }
+            }
+        }
+    }
+    
+    public void verificarConectorDisparo(){
+        for(Conector conector:conectores){
+            if(matriz[conector.getX()][conector.getY()] == CODIGO_DISPARO){
+                conectores.remove(conector);
             }
         }
     }

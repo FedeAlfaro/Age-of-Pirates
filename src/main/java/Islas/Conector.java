@@ -120,4 +120,11 @@ public class Conector {
          
         return false;
     }
+    
+    public void eliminarVertice(Vertice v){
+        for (int j = 0; j < vertices.size(); j++) {
+            if (vertices.get(j).dato == v.dato)
+                vertices.remove(j);
+        }
+    }
 }

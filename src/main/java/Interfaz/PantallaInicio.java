@@ -49,6 +49,11 @@ public class PantallaInicio extends javax.swing.JFrame {
 
         selecCantidadJugadores.setBackground(new java.awt.Color(153, 204, 0));
         selecCantidadJugadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        selecCantidadJugadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecCantidadJugadoresActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -206,12 +211,16 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     private void btnIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarPartidaActionPerformed
         // TODO add your handling code here:
-        EspacioDeJuego pantalla = new EspacioDeJuego();
-        
-        pantalla.setVisible(true);
-        
-        this.setVisible(false);
+        if(selecCantidadJugadores.getSelectedItem() != null && !txfID.getText().isBlank()){
+            EspacioDeJuego pantalla = new EspacioDeJuego(selecCantidadJugadores.getSelectedIndex()+1);
+            pantalla.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnIniciarPartidaActionPerformed
+
+    private void selecCantidadJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecCantidadJugadoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selecCantidadJugadoresActionPerformed
 
     /**
      * @param args the command line arguments

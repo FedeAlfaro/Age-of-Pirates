@@ -26,38 +26,32 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private JButton[][] btnsMapa5;
     private final int tamano = 30;
     ArrayList<Jugador> jugadores;
-    int numeroVertice;
+    int numeroVerticeJ1;
     //Grafo g = new Grafo();
     
     /**
      * Creates new form EspacioDeJuego
+     * @param cantidadJugadores
      */
-    public EspacioDeJuego() {
-        numeroVertice = 0;
+    public EspacioDeJuego(int cantidadJugadores) {
+        numeroVerticeJ1 = 0;
         
         jugadores = new ArrayList<Jugador>();
         
-        Jugador j0 = new Jugador(0);
-        Jugador j1 = new Jugador(1);
-        Jugador j2 = new Jugador(2);
-        Jugador j3 = new Jugador(3);
-        Jugador j4 = new Jugador(4);
+        for(int i=0;i<cantidadJugadores;i++){
+            Jugador j0 = new Jugador(i);
+            jugadores.add(j0);
+        }
         
-        j1.getMapa().agregarFuente(0,15,15);
-        j1.getMapa().agregarFabrica(1,14,13,0,0);
-        j1.getMapa().agregarFabrica(2,13,12,0,0);
-        j1.getMapa().agregarFabrica(3,12,11,0,1);
-        j1.getMapa().agregarFabrica(3,11,10,0,1);
-        j1.getMapa().agregarFabrica(4,10,9,0,1);
-        j1.getMapa().agregarFabrica(5,9,8,0,2);
-        j1.getMapa().agregarFabrica(6,8,7,0,2);
-        j1.getMapa().agregarFabrica(7,7,6,0,0);   
-        
-        jugadores.add(j0);
-        jugadores.add(j1);
-        jugadores.add(j2);
-        jugadores.add(j3);
-        jugadores.add(j4);
+        jugadores.get(0).getMapa().agregarFuente(0,15,15);
+        jugadores.get(0).getMapa().agregarFabrica(1,14,13,0,0);
+        jugadores.get(0).getMapa().agregarFabrica(2,13,12,0,0);
+        jugadores.get(0).getMapa().agregarFabrica(3,12,11,0,1);
+        jugadores.get(0).getMapa().agregarFabrica(3,11,10,0,1);
+        jugadores.get(0).getMapa().agregarFabrica(4,10,9,0,1);
+        jugadores.get(0).getMapa().agregarFabrica(5,9,8,0,2);
+        jugadores.get(0).getMapa().agregarFabrica(6,8,7,0,2);
+        jugadores.get(0).getMapa().agregarFabrica(7,7,6,0,0);   
         
         generarRemolinos();
         
@@ -93,19 +87,19 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
             case 0: 
                 j.getMapa().agregarFuente(0, x, y);
                 resultado = true;
-                numeroVertice++;
+                numeroVerticeJ1++;
                 break;
             case 1:  //Mina
-                resultado = j.getMapa().agregarFabrica(numeroVertice, x, y, orientacion, 0);
-                numeroVertice++;        
+                resultado = j.getMapa().agregarFabrica(numeroVerticeJ1, x, y, orientacion, 0);
+                numeroVerticeJ1++;        
                 break;
             case 2:  //Armeria
-                resultado = j.getMapa().agregarFabrica(numeroVertice, x, y, orientacion, 1);
-                numeroVertice++;
+                resultado = j.getMapa().agregarFabrica(numeroVerticeJ1, x, y, orientacion, 1);
+                numeroVerticeJ1++;
                 break;
             case 3: //Fabrica de brujas
-                resultado = j.getMapa().agregarFabrica(numeroVertice, x, y, orientacion, 2);
-                numeroVertice++;
+                resultado = j.getMapa().agregarFabrica(numeroVerticeJ1, x, y, orientacion, 2);
+                numeroVerticeJ1++;
                 break;
             default:
                 resultado = false;
@@ -689,11 +683,13 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         //</editor-fold>
 
         /* Create and display the form */
+        /*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EspacioDeJuego().setVisible(true);
             }
         });
+        */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
