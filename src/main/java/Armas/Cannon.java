@@ -6,6 +6,7 @@ package Armas;
 
 import Jugador.Jugador;
 import Mapa.Grafo;
+import General.IConstants;
 
 /**
  *
@@ -25,5 +26,6 @@ public class Cannon extends Arma{
     // Métodos
     @Override
     public void atacar(Jugador atacando, Jugador victima) {
+        victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
     }
 }

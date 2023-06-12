@@ -536,4 +536,12 @@ public class Grafo implements IConstants{
         }
         return false;
     }
+    
+    public int getDatoMatriz(int x, int y){
+        return matriz[x][y];
+    }
+    
+    public void setDatoMatriz(int x, int y, int dato){
+        matriz[x][y] = dato;
+    }
 }

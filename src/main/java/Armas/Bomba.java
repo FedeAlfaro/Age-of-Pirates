@@ -5,7 +5,7 @@
 package Armas;
 
 import Jugador.Jugador;
-import Mapa.Grafo;
+import Islas.Grafo;
 import java.util.Random;
 import Fabricas.Enum.ORIENTACION;
 
@@ -42,15 +42,23 @@ public class Bomba extends Arma {
     // Métodos
     @Override
     public void atacar(Jugador atacando, Jugador victima) {
-        /*
-        victima.atacarVertice(targetX, targetY, coste);
-        if (horizontal){
-            victima.atacarVertice(targetX, targetY+1, coste);
+        victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
+        if (orientacion.getValue() == 1){
+            if (targetX == TAMANO_MATRIZ-1){
+                victima.getMapa().setDatoMatriz(targetX-1, targetY, CODIGO_DISPARO);
+            }
+            else{
+                victima.getMapa().setDatoMatriz(targetX+1, targetY, CODIGO_DISPARO);
+            }
         }
         else{
-            victima.atacarVertice(targetX+1, targetY, coste);
+            if (targetY == TAMANO_MATRIZ-1){
+                victima.getMapa().setDatoMatriz(targetX, targetY-1, CODIGO_DISPARO);
+            }
+            else{
+                victima.getMapa().setDatoMatriz(targetX, targetY+1, CODIGO_DISPARO);
+            }
         }
- */
     }
     
 }

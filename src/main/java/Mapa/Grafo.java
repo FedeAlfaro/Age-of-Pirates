@@ -69,6 +69,14 @@ public class Grafo {
         this.visible = visible;
     }
     
+    public int getDatoMatriz(int x, int y){
+        return matriz[x][y];
+    }
+    
+    public void setDatoMatriz(int x, int y, int dato){
+        matriz[x][y] = dato;
+    }
+    
     // metodos
     public void agregarVertice(int v)
     {
