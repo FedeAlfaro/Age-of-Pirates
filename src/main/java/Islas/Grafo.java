@@ -544,4 +544,13 @@ public class Grafo implements IConstants{
     public void setDatoMatriz(int x, int y, int dato){
         matriz[x][y] = dato;
     }
+    
+    public boolean hayFuente(){
+        for (int i = 0; i < vertices.size(); i++){
+            if (vertices.get(i).fabrica instanceof FuenteEnergia){
+                return true;
+            }
+        }
+        return false;
+    }
 }

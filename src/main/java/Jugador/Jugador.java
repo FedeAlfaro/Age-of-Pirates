@@ -15,7 +15,7 @@ public class Jugador implements IConstants{
  
     // Atributos
     private Grafo mapa;
-    private Inventario inventario;
+    public Inventario inventario;
     private int dinero;
     private boolean vivo;
     private int id;

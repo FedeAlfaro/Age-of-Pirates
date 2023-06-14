@@ -6,7 +6,7 @@ package Armas;
 
 import General.IConstants;
 import Jugador.*;
-import Mapa.Grafo;
+import Islas.Grafo;
 
 /**
  *
@@ -54,4 +54,17 @@ public abstract class Arma implements IConstants{
     // Métodos
     public abstract void atacar(Jugador atacante, Jugador defensor);
     
+    public void ganaFuente(Jugador atacante, Jugador defensor){
+        if (!defensor.getMapa().hayFuente()){
+            atacante.inventario.setFuentesEnergia(atacante.inventario.getFuentesEnergia() + 1);
+        }
+    }
+    
+    public void ataquesRemolino(Jugador atacante){
+        for (int i = 0; i < 3; i++){ // 3 disparos más
+                int posX = (int)Math.floor(Math.random() * (TAMANO_MATRIZ - 0 + 1) + 0);
+                int posY = (int)Math.floor(Math.random() * (TAMANO_MATRIZ - 0 + 1) + 0);
+                atacante.getMapa().setDatoMatriz(posX, posY, CODIGO_DISPARO);
+            } 
+    }
 }

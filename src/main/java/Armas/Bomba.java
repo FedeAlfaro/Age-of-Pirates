@@ -42,23 +42,30 @@ public class Bomba extends Arma {
     // Métodos
     @Override
     public void atacar(Jugador atacando, Jugador victima) {
-        victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
-        if (orientacion.getValue() == 1){
-            if (targetX == TAMANO_MATRIZ-1){
-                victima.getMapa().setDatoMatriz(targetX-1, targetY, CODIGO_DISPARO);
-            }
-            else{
-                victima.getMapa().setDatoMatriz(targetX+1, targetY, CODIGO_DISPARO);
-            }
+        if (victima.getMapa().matriz[targetX][targetY] == CODIGO_REMOLINO){
+            ataquesRemolino(atacando);
+            ganaFuente(victima, atacando);
         }
         else{
-            if (targetY == TAMANO_MATRIZ-1){
-                victima.getMapa().setDatoMatriz(targetX, targetY-1, CODIGO_DISPARO);
+            victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
+            if (orientacion.getValue() == 1){
+                if (targetX == TAMANO_MATRIZ-1){
+                    victima.getMapa().setDatoMatriz(targetX-1, targetY, CODIGO_DISPARO);
+                }
+                else{
+                    victima.getMapa().setDatoMatriz(targetX+1, targetY, CODIGO_DISPARO);
+                }
             }
             else{
-                victima.getMapa().setDatoMatriz(targetX, targetY+1, CODIGO_DISPARO);
+                if (targetY == TAMANO_MATRIZ-1){
+                    victima.getMapa().setDatoMatriz(targetX, targetY-1, CODIGO_DISPARO);
+                }
+                else{
+                    victima.getMapa().setDatoMatriz(targetX, targetY+1, CODIGO_DISPARO);
+                }
             }
         }
+        ganaFuente(atacando, victima);
     }
     
 }

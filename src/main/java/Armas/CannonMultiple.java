@@ -25,15 +25,22 @@ public class CannonMultiple extends Arma{
     // Métodos
     @Override
     public void atacar(Jugador atacando, Jugador victima) {
-        victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
-        if (victima.getMapa().getDatoMatriz(targetX, targetY) == CODIGO_DISPARO){
-            
-            for (int i = 0; i < 3; i++){ // 3 disparos si acierta
-                int posX = (int)Math.floor(Math.random() * (TAMANO_MATRIZ - 0 + 1) + 0);
-                int posY = (int)Math.floor(Math.random() * (TAMANO_MATRIZ - 0 + 1) + 0);
-                victima.getMapa().setDatoMatriz(posX, posY, CODIGO_DISPARO);
+        if (victima.getMapa().matriz[targetX][targetY] == CODIGO_REMOLINO){
+            ataquesRemolino(atacando);
+            ganaFuente(victima, atacando);
+        }
+        else{
+            victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
+            if (victima.getMapa().getDatoMatriz(targetX, targetY) == CODIGO_DISPARO){
+
+                for (int i = 0; i < 3; i++){ // 3 disparos si acierta
+                    int posX = (int)Math.floor(Math.random() * (TAMANO_MATRIZ - 0 + 1) + 0);
+                    int posY = (int)Math.floor(Math.random() * (TAMANO_MATRIZ - 0 + 1) + 0);
+                    victima.getMapa().setDatoMatriz(posX, posY, CODIGO_DISPARO);
+                }
             }
         }
+        ganaFuente(atacando, victima);
     }
     
 }
