@@ -26,6 +26,13 @@ public class Cannon extends Arma{
     // Métodos
     @Override
     public void atacar(Jugador atacando, Jugador victima) {
-        victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
+        if (victima.getMapa().matriz[targetX][targetY] == CODIGO_REMOLINO){
+            ataquesRemolino(atacando);
+            ganaFuente(victima, atacando);
+        }
+        else{
+            victima.getMapa().setDatoMatriz(targetX, targetY, CODIGO_DISPARO);
+            ganaFuente(atacando, victima);
+        }
     }
 }
