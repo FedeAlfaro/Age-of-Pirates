@@ -8,6 +8,7 @@ Islas\Grafo.class
 Fabricas\TemploBruja.class
 Interfaz\Mercado.class
 Jugador\Inventario.class
+Interfaz\EspacioDeJuego$5.class
 Armas\FactoryArmas.class
 Chat\ClientHandler.class
 Chat\Server.class
@@ -19,6 +20,7 @@ Interfaz\EspacioDeJuego$2.class
 Communication\Package.class
 General\AgeOfPirates.class
 Modelo\Modelo.class
+Interfaz\EspacioDeJuego$6.class
 Interfaz\Mercado$2.class
 General\IConstants.class
 Armas\Cannon.class

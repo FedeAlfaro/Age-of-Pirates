@@ -74,13 +74,15 @@ public class Conector {
     }        
     
     public boolean conectar(Vertice v){
-        if(v.dato==0 && v.fabrica!=null){
-            if(esAdyacienteFabrica(v.fabrica.getX(),v.fabrica.getX()));
+        if(v.fabrica!=null){
+            if(v.dato==0){
+                if(esAdyacienteFuente(v.fabrica.getX(),v.fabrica.getX()));
+                    vertices.add(v);
+                    return true;
+            }else if(esAdyaciente(v.fabrica.getX(),v.fabrica.getY(), v.fabrica.getOrientacion().getValue())){
                 vertices.add(v);
                 return true;
-        }else if(esAdyaciente(v.fabrica.getX(),v.fabrica.getY(), v.fabrica.getOrientacion().getValue())){
-            vertices.add(v);
-            return true;
+            }
         }
         return false;    
     }
@@ -106,7 +108,7 @@ public class Conector {
         return false;
     }
     
-    public boolean esAdyacienteFabrica(int _x,int _y){
+    public boolean esAdyacienteFuente(int _x,int _y){
         
         if(x-2==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
                 return true;

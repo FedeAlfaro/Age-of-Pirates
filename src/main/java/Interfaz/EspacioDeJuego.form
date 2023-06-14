@@ -377,17 +377,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel8" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jLabel3" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
                       <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -409,6 +398,14 @@
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel4" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jLabel3" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -708,10 +705,12 @@
         <Component class="javax.swing.JComboBox" name="cmbComprarFabrica1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Mina ($1000)"/>
-                <StringItem index="1" value="Templo de la Bruja ($2500)"/>
-                <StringItem index="2" value="Armeria ($1500)"/>
+              <StringArray count="5">
+                <StringItem index="0" value="Fuente de poder ($12000)"/>
+                <StringItem index="1" value="Mina ($1000)"/>
+                <StringItem index="2" value="Templo de la Bruja ($2500)"/>
+                <StringItem index="3" value="Armeria ($1500)"/>
+                <StringItem index="4" value="Conector ($100)"/>
               </StringArray>
             </Property>
           </Properties>
@@ -843,6 +842,10 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Comprar y agregar al mapa"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnComprarAgregarFabricaMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComprarAgregarFabricaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

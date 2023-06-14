@@ -90,7 +90,9 @@ public class Grafo implements IConstants{
     public boolean agregarConector(int x,int y){
         if(verificarEspacioConector(x,y)){
             Conector conector = new Conector(x,y);
+            matriz[x][y] = CODIGO_CONECTOR;
             conectores.add(conector);
+            conectarConectores();
             return true;
         }
         return false;
@@ -117,11 +119,12 @@ public class Grafo implements IConstants{
         }
         for(Conector conector:conectores){
             if(vertices.get(0).fabrica !=null && conector.getVertices().stream().anyMatch(p->p.dato == 0)){
+                System.out.println("Entró");
                 conector.noMostrar();
                 for(int i=0;i<conector.getVertices().size();i++){
-                    for(int j=0;i<vertices.size();j++){
-                        if(vertices.get(j)==conector.getVertices().get(i)){
-                            vertices.get(j).fabrica.noMostrar();
+                    for(Vertice v:vertices){
+                        if(v.dato==conector.getVertices().get(i).dato){
+                            v.fabrica.noMostrar();
                         }
                     }
                 }
@@ -368,7 +371,7 @@ public class Grafo implements IConstants{
     }
     
     public boolean finalizar(){
-        if(vertices.isEmpty()){
+        if(vertices.size()==1 && vertices.get(0).fabrica==null){
             return true;
             
         }else if( vertices.get(0).fabrica == null){
@@ -401,15 +404,9 @@ public class Grafo implements IConstants{
         return matriz;
     }
     
-    public int[][] retornarMatrizVisible(){ //-1 conector 
+    public int[][] retornarMatrizVisible(){ 
         int matrizAux[][] = new int[TAMANO_MATRIZ][TAMANO_MATRIZ];
         for(int i=0;i<vertices.size();i++){
-           
-            Conector conector = conectores.get(i);
-            if(conector.isVisible()){
-                matrizAux[conector.getX()][conector.getY()] = CODIGO_CONECTOR;
-            }
-            
             if(vertices.get(i).fabrica!=null){
                 if(vertices.get(i).fabrica.isVisible()){
                     if(vertices.get(i).fabrica.getNombre() == "Armeria"){
@@ -420,6 +417,11 @@ public class Grafo implements IConstants{
                         matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
                     }
                 }
+            }
+        }
+        for(Conector c:conectores){
+            if(c.isVisible()){
+                matrizAux[c.getX()][c.getY()] = CODIGO_CONECTOR;
             }
         }
         
@@ -461,6 +463,18 @@ public class Grafo implements IConstants{
             }
             System.out.println();
         }
+    }
+    
+    public String imprimirMatriz3(){
+        String resultado = "";
+        int[][] m = retornarMatrizVisible();
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                resultado+= m[j][i]+" ";
+            }
+            resultado+= "\n";
+        }
+        return resultado;
     }
     
     
@@ -510,13 +524,13 @@ public class Grafo implements IConstants{
     //int IDvertice,int x,int y, int orientacion, int tipoFabrica
     public boolean verificarEspacioFabrica(int x,int y, int orientacion){
         if(orientacion == 0){
-            if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO ) 
-                    && ((matriz[x][y+1]==CODIGO_DISPARO || matriz[x][y+1]==0) || matriz[x][y+1] == CODIGO_REMOLINO )){
+            if( (matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) 
+                    && (matriz[x][y+1]==CODIGO_DISPARO || matriz[x][y+1]==0) ){
                 return true;
             }
         }else if(orientacion == 1){
-            if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO ) 
-                    && ((matriz[x+1][y]==CODIGO_DISPARO || matriz[x+1][y]==0) || matriz[x+1][y] == CODIGO_REMOLINO )){
+            if( (matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 )  
+                    && (matriz[x+1][y]==CODIGO_DISPARO || matriz[x+1][y]==0) ){
                 return true;
             }
         }
@@ -524,14 +538,14 @@ public class Grafo implements IConstants{
     }
     
     public boolean verificarEspacioConector(int x,int y){
-        if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO )  ){
+        if( (matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 )  ){
             return true;
         }
         return false;
     }
     
     public boolean verificarEspacioRemolino(int x,int y){
-        if( ((matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) || matriz[x][y] == CODIGO_REMOLINO )  ){
+        if( (matriz[x][y]==CODIGO_DISPARO || matriz[x][y]==0 ) ){
             return true;
         }
         return false;

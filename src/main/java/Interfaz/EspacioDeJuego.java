@@ -14,6 +14,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 /**
  *
  * @author USUARIO
@@ -26,7 +27,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private JButton[][] btnsMapa5;
     private final int tamano = 30;
     ArrayList<Jugador> jugadores;
-    int numeroVerticeJ1;
     //Grafo g = new Grafo();
     
     /**
@@ -34,7 +34,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
      * @param cantidadJugadores
      */
     public EspacioDeJuego(int cantidadJugadores) {
-        numeroVerticeJ1 = 0;
         
         jugadores = new ArrayList<Jugador>();
         
@@ -61,11 +60,36 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         btnsMapa4 = new JButton[TAMANO_MATRIZ][TAMANO_MATRIZ];
         btnsMapa5 = new JButton[TAMANO_MATRIZ][TAMANO_MATRIZ];
         initComponents();
-        initMapa();
-        initMapaEnemigo1();
-        initMapaEnemigo2();
-        initMapaEnemigo3();
-        initMapaEnemigo4();
+        switch(cantidadJugadores){
+            case 1: 
+                initMapa();
+                break;
+            case 2:  
+                initMapa();
+                initMapaEnemigo1();
+                break;
+            case 3: 
+                initMapa();
+                initMapaEnemigo1();
+                initMapaEnemigo2();
+                break;
+            case 4: 
+                initMapa();
+                initMapaEnemigo1();
+                initMapaEnemigo2();
+                initMapaEnemigo3();
+                break;
+            case 5:
+                initMapa();
+                initMapaEnemigo1();
+                initMapaEnemigo2();
+                initMapaEnemigo3();
+                initMapaEnemigo4();
+                break;
+            default:
+                break;
+        }
+        
         
         int fontSize = 16; // Tamaño de la fuente
         String fontName = "Open Sans"; // Nombre de la fuente
@@ -86,27 +110,33 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     public boolean agregar(Jugador j, int x, int y, int orientacion, int tipoFabrica){
         boolean resultado;
         switch(tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
-            case 0: 
+            case 0: //Fuente de poder
                 j.getMapa().agregarFuente(0, x, y);
                 resultado = true;
-                numeroVerticeJ1++;
+                colorearMapa(j.getMapa(),btnsMapa1);
                 break;
             case 1:  //Mina
-                resultado = j.getMapa().agregarFabrica(numeroVerticeJ1, x, y, orientacion, 0);
-                numeroVerticeJ1++;        
+                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 0); 
+                colorearMapa(j.getMapa(),btnsMapa1);
                 break;
             case 2:  //Armeria
-                resultado = j.getMapa().agregarFabrica(numeroVerticeJ1, x, y, orientacion, 1);
-                numeroVerticeJ1++;
+                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 1);
+                colorearMapa(j.getMapa(),btnsMapa1);
                 break;
             case 3: //Fabrica de brujas
-                resultado = j.getMapa().agregarFabrica(numeroVerticeJ1, x, y, orientacion, 2);
-                numeroVerticeJ1++;
+                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 2);
+                colorearMapa(j.getMapa(),btnsMapa1);
+                break;
+            case 4: //Conector
+                resultado = j.getMapa().agregarConector(x, y);
+                colorearMapa(j.getMapa(),btnsMapa1);
                 break;
             default:
                 resultado = false;
                 break;
         }
+        System.out.println( j.getMapa().imprimirMatriz3());
+        //JOptionPane.showMessageDialog(null, j.getMapa().imprimirMatriz3(), "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         return resultado;
     }
     
@@ -519,14 +549,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,7 +564,13 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(276, 276, 276)
                                 .addComponent(cmbTipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -585,7 +613,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Seleccione la fabrica que desea comprar y agregar al mapa");
 
-        cmbComprarFabrica1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mina ($1000)", "Templo de la Bruja ($2500)", "Armeria ($1500)" }));
+        cmbComprarFabrica1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fuente de poder ($12000)", "Mina ($1000)", "Templo de la Bruja ($2500)", "Armeria ($1500)", "Conector ($100)" }));
         cmbComprarFabrica1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbComprarFabrica1ActionPerformed(evt);
@@ -617,6 +645,16 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         btnComprarAgregarFabrica.setBackground(new java.awt.Color(51, 51, 255));
         btnComprarAgregarFabrica.setForeground(new java.awt.Color(255, 255, 255));
         btnComprarAgregarFabrica.setText("Comprar y agregar al mapa");
+        btnComprarAgregarFabrica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnComprarAgregarFabricaMouseClicked(evt);
+            }
+        });
+        btnComprarAgregarFabrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarAgregarFabricaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -759,6 +797,18 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private void cmbComprarFabrica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbComprarFabrica1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbComprarFabrica1ActionPerformed
+
+    private void btnComprarAgregarFabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarAgregarFabricaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnComprarAgregarFabricaActionPerformed
+
+    private void btnComprarAgregarFabricaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprarAgregarFabricaMouseClicked
+        if(!agregar(jugadores.get(0),cmbPosXFabrica.getSelectedIndex(),
+                cmbPosYFabricas.getSelectedIndex(),cmbOrientacionFabrica.getSelectedIndex(),
+                cmbComprarFabrica1.getSelectedIndex() ) ){
+            JOptionPane.showMessageDialog(null, "No se pudo agregar el componente solicitado, revise la ubicación y orientación elegida", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnComprarAgregarFabricaMouseClicked
     
     /**
      * @param args the command line arguments
@@ -788,13 +838,13 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         //</editor-fold>
 
         /* Create and display the form */
-        /*
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EspacioDeJuego().setVisible(true);
+                new EspacioDeJuego(3).setVisible(true);
             }
         });
-        */
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -19,6 +19,7 @@ public class Jugador implements IConstants{
     private int dinero;
     private boolean vivo;
     private int id;
+    private int numeroComponente;
     
     // Constructor
     public Jugador(int id) {
@@ -27,6 +28,7 @@ public class Jugador implements IConstants{
         this.mapa = new Grafo();
         this.inventario = new Inventario();
         this.id = id; 
+        numeroComponente = 0;
     }
     
     // Gets y sets
@@ -68,5 +70,10 @@ public class Jugador implements IConstants{
 
     public void setVivo(boolean vivo) {
         this.vivo = vivo;
+    }
+    
+    public int getNumeroComponente(){
+        numeroComponente++;
+        return numeroComponente-1;
     }
 }
