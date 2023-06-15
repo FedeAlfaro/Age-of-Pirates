@@ -1,38 +1,38 @@
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Armas\Arma.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\FuenteEnergia.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Armas\CannonMultiple.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Communication\Package.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Jugador\Inventario.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\General\IConstants.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Armas\CannonBarbaRoja.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Mapa\Vertice.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Modelo\Modelo.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\Productor.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Islas\Vertice.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Chat\ClientHandler.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Communication\SocketServer.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\Enum\TIPO_FABRICA.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Islas\Conector.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Mapa\Grafo.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Islas\Grafo.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Communication\Listener.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Armas\Cannon.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Mercado\Mercado.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\General\PorMientras.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Chat\Server.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Armas\FactoryArmas.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\Armeria.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Interfaz\Mercado.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Interfaz\EspacioDeJuego.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\Enum\ORIENTACION.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\TemploBruja.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Interfaz\PantallaInicio.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Jugador\Jugador.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\Fabrica.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Armas\Bomba.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Chat\Client.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\General\BarcoFantasma.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Chat\Constants.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Communication\SocketClient.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\Fabricas\Mina.java
-C:\Users\Usuario\Desktop\TEC\Cursos\ED 2.0\Progra 3\AgeOfPirates\src\main\java\General\AgeOfPirates.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Chat\ClientHandler.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\TemploBruja.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Chat\Server.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Armas\Arma.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Communication\Listener.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\General\PorMientras.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Mercado\Mercado.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Armas\CannonBarbaRoja.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\Enum\ORIENTACION.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Communication\Package.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\General\IConstants.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Communication\SocketClient.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Islas\Vertice.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Interfaz\EspacioDeJuego.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\FuenteEnergia.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Modelo\Modelo.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Interfaz\Mercado.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Armas\CannonMultiple.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Islas\Grafo.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\Mina.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Armas\FactoryArmas.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Interfaz\PantallaInicio.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Communication\SocketServer.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Chat\Constants.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\Enum\TIPO_FABRICA.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\Armeria.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\Fabrica.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Jugador\Inventario.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Armas\Bomba.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Armas\Cannon.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Mapa\Vertice.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\General\AgeOfPirates.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Jugador\Jugador.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\General\BarcoFantasma.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Chat\Client.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Fabricas\Productor.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Islas\Conector.java
+C:\Users\sotic\OneDrive\Documentos\GitHub\Age-of-Pirates\src\main\java\Mapa\Grafo.java
