@@ -17,7 +17,7 @@ public class AgeOfPirates {
     public static void main(String[] args) {
         Grafo g = new Grafo();
         
-        g.agregarFuente(0,15,15);
+        g.agregarFuente(15,15);
         g.agregarFabrica(1,14,13,0,0);
         g.agregarFabrica(2,13,12,0,0);
         g.agregarFabrica(3,12,11,0,1);

@@ -35,9 +35,15 @@ public class Grafo implements IConstants{
         }
     }
 
-    public void agregarFuente(int IDvertice,int x,int y){
-        agregarVertice(IDvertice);
+    public ArrayList<Vertice> getVertices() {
+        return vertices;
+    }
+
+    public void agregarFuente(int x,int y){
+        Vertice vertice = new Vertice(0);
+        vertices.add(vertice);
         Fabrica fuente = new FuenteEnergia(x,y);
+        vertice.fabrica = fuente;
         matriz[x][y] = CODIGO_FUENTE;
         matriz[x+1][y] = CODIGO_FUENTE;
         matriz[x][y+1] = CODIGO_FUENTE;
@@ -46,8 +52,8 @@ public class Grafo implements IConstants{
     
     public boolean agregarFabrica(int IDvertice,int x,int y, int orientacion, int tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
         if(verificarEspacioFabrica(x,y, orientacion)){
-            agregarVertice(IDvertice);                                                      //0vertical(0), horizontal(1)
-            Vertice vertice = buscarVertice(IDvertice);
+            Vertice vertice = new Vertice(IDvertice);
+            vertices.add(vertice);
 
             switch (tipoFabrica) {
                 case 0:
@@ -105,6 +111,7 @@ public class Grafo implements IConstants{
             matriz[x][y] = CODIGO_CONECTOR;
             conectores.add(conector);
             conectarConectores();
+            System.out.println("Se llama a agregar conectores");
             return true;
         }
         return false;
@@ -116,6 +123,7 @@ public class Grafo implements IConstants{
                 conector.conectar(v);
             }
         }
+        System.out.println("Se llama a agregar conectores");
         visibilizar();
     }
     
@@ -129,9 +137,12 @@ public class Grafo implements IConstants{
         if(vertices.get(0).fabrica!=null){
             vertices.get(0).fabrica.noMostrar();
         }
-        conectores.stream().filter(p->p.vertices.stream()
-                .anyMatch(f->f.dato==0))
-                .forEach(m->m.noMostrar());    //Todos los vertices conectados a la fuente de poder los hace invisibles
+        conectores.stream()
+            .filter(p->p.vertices.stream().anyMatch(f->f.dato==0))
+            .forEach(m->m.noMostrar());    //Todos los vertices conectados a la fuente de poder los hace invisibles
+        System.out.println("Hay algún conector al rededor de la fuente: "
+                + conectores.get(0).conectar(vertices.get(0))+" \n Fuente x: "
+                +vertices.get(0).getFabrica().getX()+" y: "+vertices.get(0).getFabrica().getY()+"\nconector x: "+conectores.get(0).getX()+" y:"+ conectores.get(0).getY());
         conectores.stream()
                 .filter(p->!p.isVisible())
                 .forEach(q->q.vertices.stream()
@@ -140,13 +151,14 @@ public class Grafo implements IConstants{
             .filter(p->!p.isVisible())
             .flatMap(conector -> conector.getVertices().stream())      
             .collect(Collectors.toList());                     //Hace una lista con todos los vectores invisibles dentro de los conectores
-                                                                       
-        vertices.stream()                                               
-            .filter(vector -> verticesInv.stream().anyMatch(v -> v.getDato() == vector.getDato())) //local varibles referenced from a lambda expresion must be final
-            .forEach(p->p.fabrica.noMostrar());                        //Hace invisible todos los vectores del grafo con conector invisible 
+        for(Vertice vertice:vertices){
+            if(verticesInv.stream().anyMatch(v -> v.getDato() == vertice.dato) ){
+                vertice.fabrica.noMostrar();
+            }
+        } //Hace invisible todos los vectores del grafo con conector invisible 
         conectores.stream().filter(p->p.vertices.stream()
                 .anyMatch(v->!v.fabrica.isVisible()))
-                .forEach(m->m.noMostrar());
+                .forEach(m->m.noMostrar()); //Hace invisible los conectores con algún vertice invisible
         
         
         for(Conector conector:conectores){
@@ -156,23 +168,28 @@ public class Grafo implements IConstants{
                 .flatMap(c -> c.getVertices().stream())      
                 .collect(Collectors.toList());                     //Hace una lista con todos los vectores invisibles dentro de los conectores
 
-            vertices.stream()                                               
-                .filter(vector -> verticesInv.stream().anyMatch(v -> v.dato == vector.dato))
-                .forEach(p->p.fabrica.noMostrar());                        //Hace invisible todos los vectores del grafo con conector invisible 
+            for(Vertice vertice:vertices){
+                if(verticesInv.stream().anyMatch(v -> v.getDato() == vertice.dato) ){
+                    vertice.fabrica.noMostrar();
+                }
+            } //Hace invisible todos los vectores del grafo con conector invisible 
             conectores.stream().filter(p->p.vertices.stream()
                     .anyMatch(v->!v.fabrica.isVisible()))
                     .forEach(m->m.noMostrar());
-            
             
         }
     }
     
     // agrega a la lista
+    
     private void agregarVertice(int valor)
     {
+        if(valor == 0){
+            vertices.add(valor, new Vertice(valor));
+        }
         vertices.add(new Vertice(valor));
     }
-
+    
     /*
     // agrega las aristas
     public void agregarArista(Vertice origen, Vertice destino)

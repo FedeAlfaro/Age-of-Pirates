@@ -76,10 +76,14 @@ public class Conector {
     public boolean conectar(Vertice v){
         if(v.fabrica!=null){
             if(v.dato==0){
-                if(esAdyacienteFuente(v.fabrica.getX(),v.fabrica.getX()));
+                System.out.println("Se encuentra la fuente");
+                if(esAdyacienteFuente(v.fabrica.getX(),v.fabrica.getY())){
+                    System.out.println("Se conecta la fuente");
                     vertices.add(v);
                     return true;
+                }
             }else if(esAdyaciente(v.fabrica.getX(),v.fabrica.getY(), v.fabrica.getOrientacion().getValue())){
+                System.out.println("Se conecta un vertice a conector");
                 vertices.add(v);
                 return true;
             }
@@ -89,19 +93,19 @@ public class Conector {
     
     public boolean esAdyaciente(int _x,int _y, int orientacion){
         if(orientacion == 0){  //vertical
-            if(x-1==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
+            if(x==_x-1 && (y == _y+1 || y == _y+2 || y==_y || y==_y-1)  ){
                 return true;
-            }else if(x==_x && (y+2 == _y || y==_y-1)  ){
+            }else if(x==_x && (y == _y+2 || y==_y-1)  ){
                 return true;
-            }else if(x+1==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
+            }else if(x==_x+1 && (y == _y+1 || y == _y+2 || y==_y || y==_y-1)  ){
                 return true;
             }
         }else if(orientacion == 1){ //horizontal
-            if( (x-2==_x || x-1==_x || x==_x || x+1 == _x) && y+1 == _y ){
+            if( (x==_x-2 || x==_x-1 || x==_x || x == _x+1) && y == _y+1 ){
                 return true;
-            }else if( (x-2==_x || x+1 == _x) && y-1==_y ){
+            }else if( (x==_x-2 || x == _x+1) && y==_y-1 ){
                 return true;
-            }else if((x-2==_x || x-1==_x || x==_x || x+1 == _x) && y==_y  ){
+            }else if((x==_x-2 || x==_x-1 || x==_x || x == _x+1) && y==_y  ){
                 return true;
             }
         }    
@@ -110,13 +114,13 @@ public class Conector {
     
     public boolean esAdyacienteFuente(int _x,int _y){
         
-        if(x-2==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
-                return true;
-        }else if(x-1==_x && (y-1==_y || y+2 == _y)  ){
+        if(x==_x-2 && (y == _y+1 || y == _y+2 || y==_y || y==_y-1)  ){
             return true;
-        }else if(x==_x && (y+2 == _y || y==_y-1)  ){
+        }else if(x==_x-1 && (y==_y-1 || y == _y+2)  ){
             return true;
-        }else if(x+1==_x && (y+1 == _y || y+2 == _y || y==_y || y-1==_y)  ){
+        }else if(x==_x && (y == _y+2 || y==_y-1)  ){
+            return true;
+        }else if(x==_x+1 && (y == _y+1 || y == _y+2 || y==_y || y==_y-1)  ){
             return true;
         }
          

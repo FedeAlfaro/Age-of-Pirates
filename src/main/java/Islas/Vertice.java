@@ -26,6 +26,10 @@ public class Vertice {
         this.visitado = false;
     }
 
+    public Fabrica getFabrica() {
+        return fabrica;
+    }
+
     public Vertice(int dato, int peso)
     {
         aristas = new ArrayList<Vertice>();

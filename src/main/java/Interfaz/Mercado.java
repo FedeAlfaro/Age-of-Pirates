@@ -6,12 +6,12 @@ package Interfaz;
 
 import Jugador.*;
 import Mercado.*;
+import java.util.ArrayList;
 /**
  *
  * @author USUARIO
  */
 public class Mercado extends javax.swing.JFrame {
-
     /**
      * Creates new form Mercado
      */
@@ -190,7 +190,7 @@ public class Mercado extends javax.swing.JFrame {
         String cantidad = txfCantIntercambio.getText();
         Inventario inter = new Inventario();
         inter.armarIntercambio(intercambio, cantidad);
-        comprar(jugadores.get(0), jugadores.get(1));
+        //comprar(jugadores.get(0), jugadores.get(1));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmbTipoIntercambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoIntercambioActionPerformed
@@ -206,7 +206,7 @@ public class Mercado extends javax.swing.JFrame {
         String cantidad = txfCantIntercambio.getText();
         Inventario inter = new Inventario();
         inter.armarIntercambio(intercambio, cantidad);
-        vender(jugadores.get(0), jugadores.get(1));
+        //vender(jugadores.get(0), jugadores.get(1));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

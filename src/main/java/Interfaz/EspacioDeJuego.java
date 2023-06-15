@@ -43,7 +43,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
             jugadores.add(j0);
         }
         
-        jugadores.get(0).getMapa().agregarFuente(0,15,15);
+        jugadores.get(0).getMapa().agregarFuente(15,15);
         jugadores.get(0).getMapa().agregarFabrica(1,14,13,0,0);
         jugadores.get(0).getMapa().agregarFabrica(2,13,12,0,0);
         jugadores.get(0).getMapa().agregarFabrica(3,12,11,0,1);
@@ -112,9 +112,15 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         boolean resultado;
         switch(tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
             case 0: //Fuente de poder
-                j.getMapa().agregarFuente(0, x, y);
-                resultado = true;
-                colorearMapa(j.getMapa(),btnsMapa1);
+                if(j.getMapa().getVertices().get(0).getFabrica() != null){
+                    j.getMapa().agregarFuente(x, y);
+                    resultado = true;
+                    colorearMapa(j.getMapa(),btnsMapa1);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Ya hay una fuente de poder", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    resultado = false;
+                }
                 break;
             case 1:  //Mina
                 resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 0); 
