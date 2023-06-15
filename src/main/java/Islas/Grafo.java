@@ -8,6 +8,8 @@ import Fabricas.*;
 import static Fabricas.Enum.ORIENTACION.*;
 import General.IConstants;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -78,6 +80,16 @@ public class Grafo implements IConstants{
                         matriz[x+1][y] = CODIGO_TEMPLO_BRUJA;
                     }
                     break;
+                case 3:
+                    Fabrica mercado = new Mercado(x,y,orientacion);
+                    vertice.fabrica = mercado;
+                    matriz[x][y] = CODIGO_TEMPLO_BRUJA;
+                    if(orientacion == 0){
+                        matriz[x][y+1] = CODIGO_TEMPLO_BRUJA;
+                    }else if(orientacion == 1){
+                        matriz[x+1][y] = CODIGO_TEMPLO_BRUJA;
+                    }
+                    break;    
                 default:
                     System.out.println("Opción de fábrica no válida");
                     break;
@@ -117,18 +129,41 @@ public class Grafo implements IConstants{
         if(vertices.get(0).fabrica!=null){
             vertices.get(0).fabrica.noMostrar();
         }
+        conectores.stream().filter(p->p.vertices.stream()
+                .anyMatch(f->f.dato==0))
+                .forEach(m->m.noMostrar());    //Todos los vertices conectados a la fuente de poder los hace invisibles
+        conectores.stream()
+                .filter(p->!p.isVisible())
+                .forEach(q->q.vertices.stream()
+                        .forEach(f->f.fabrica.noMostrar())); //Todos los vectores dentro de los conectores invisibles se hacen invisibles
+        List<Vertice> verticesInv = conectores.stream()
+            .filter(p->!p.isVisible())
+            .flatMap(conector -> conector.getVertices().stream())      
+            .collect(Collectors.toList());                     //Hace una lista con todos los vectores invisibles dentro de los conectores
+                                                                       
+        vertices.stream()                                               
+            .filter(vector -> verticesInv.stream().anyMatch(v -> v.getDato() == vector.getDato())) //local varibles referenced from a lambda expresion must be final
+            .forEach(p->p.fabrica.noMostrar());                        //Hace invisible todos los vectores del grafo con conector invisible 
+        conectores.stream().filter(p->p.vertices.stream()
+                .anyMatch(v->!v.fabrica.isVisible()))
+                .forEach(m->m.noMostrar());
+        
+        
         for(Conector conector:conectores){
-            if(vertices.get(0).fabrica !=null && conector.getVertices().stream().anyMatch(p->p.dato == 0)){
-                System.out.println("Entró");
-                conector.noMostrar();
-                for(int i=0;i<conector.getVertices().size();i++){
-                    for(Vertice v:vertices){
-                        if(v.dato==conector.getVertices().get(i).dato){
-                            v.fabrica.noMostrar();
-                        }
-                    }
-                }
-            }
+           
+            verticesInv = conectores.stream()
+                .filter(p->!p.isVisible())
+                .flatMap(c -> c.getVertices().stream())      
+                .collect(Collectors.toList());                     //Hace una lista con todos los vectores invisibles dentro de los conectores
+
+            vertices.stream()                                               
+                .filter(vector -> verticesInv.stream().anyMatch(v -> v.dato == vector.dato))
+                .forEach(p->p.fabrica.noMostrar());                        //Hace invisible todos los vectores del grafo con conector invisible 
+            conectores.stream().filter(p->p.vertices.stream()
+                    .anyMatch(v->!v.fabrica.isVisible()))
+                    .forEach(m->m.noMostrar());
+            
+            
         }
     }
     

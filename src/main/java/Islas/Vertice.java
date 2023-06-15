@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author dmora
  */
 public class Vertice {
-    public int dato;
+    public final int dato;
     boolean visitado;
     ArrayList<Vertice> aristas;
     int peso;//peso
@@ -83,6 +83,10 @@ public class Vertice {
                 return i;
         }
         return -1;
+    }
+
+    public int getDato() {
+        return dato;
     }
     
 }

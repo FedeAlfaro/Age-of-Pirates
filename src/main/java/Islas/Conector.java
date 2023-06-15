@@ -15,7 +15,7 @@ public class Conector {
     private int y;
     private boolean visible;
     private boolean usado;
-    private ArrayList<Vertice> vertices;
+    public ArrayList<Vertice> vertices;
     
     Conector(int _x,int _y){
         x = _x;

@@ -45,4 +45,5 @@ public interface IConstants {
     public static final int CODIGO_TEMPLO_BRUJA = -4;
     public static final int CODIGO_DISPARO = -5;
     public static final int CODIGO_REMOLINO = -6;
+    public static final int CODIGO_MERCADO = -7;
 }

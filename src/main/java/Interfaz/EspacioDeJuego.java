@@ -25,6 +25,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private JButton[][] btnsMapa3;
     private JButton[][] btnsMapa4;
     private JButton[][] btnsMapa5;
+    private JButton[][] btnsMapaActual;
     private final int tamano = 30;
     ArrayList<Jugador> jugadores;
     //Grafo g = new Grafo();
@@ -102,7 +103,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         
         lbl_Sucesos.setText("Se agregó la fuente en la posición x:"+"15"+" y: "+"15 \n");
         lbl_Sucesos.setText(lbl_Sucesos.getText()+"Se agregó la fuente en la posición x:"+"15"+" y: "+"15");
-        
+        btnsMapaActual = btnsMapa1;
     }
 
     
@@ -127,7 +128,11 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
                 resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 2);
                 colorearMapa(j.getMapa(),btnsMapa1);
                 break;
-            case 4: //Conector
+            case 4:
+                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 3);
+                colorearMapa(j.getMapa(),btnsMapa1);
+                break;
+            case 5: //Conector
                 resultado = j.getMapa().agregarConector(x, y);
                 colorearMapa(j.getMapa(),btnsMapa1);
                 break;
@@ -171,7 +176,10 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
                         break;
                     case CODIGO_REMOLINO:  
                         btns[i][j].setBackground(Color.BLUE);
-                        break;    
+                        break;  
+                    case CODIGO_MERCADO:  
+                        btns[i][j].setBackground(Color.BLACK);
+                        break;      
                     default:
                         break;
                 }
@@ -613,7 +621,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Seleccione la fabrica que desea comprar y agregar al mapa");
 
-        cmbComprarFabrica1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fuente de poder ($12000)", "Mina ($1000)", "Templo de la Bruja ($2500)", "Armeria ($1500)", "Conector ($100)" }));
+        cmbComprarFabrica1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fuente de poder ($12000)", "Mina ($1000)", "Templo de la Bruja ($2500)", "Armeria ($1500)", "Mercado ($2000)", "Conector ($100)" }));
         cmbComprarFabrica1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbComprarFabrica1ActionPerformed(evt);
