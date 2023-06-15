@@ -17,6 +17,7 @@ public class Inventario {
     private int barcosPirata;
     private int fuentesEnergia;
     private int tamanno = 6;
+    private int acero;
     
     public Inventario() {
         this.cannon = 0;
@@ -25,6 +26,7 @@ public class Inventario {
         this.cannonBarbaRoja = 0;
         this.barcosPirata = 0;
         this.fuentesEnergia = 0;
+        this.acero = 0;
     }
     
     public int getCannon() {
@@ -137,6 +139,29 @@ public class Inventario {
         }
         if (peticion.getFuentesEnergia() != 0){
             this.setFuentesEnergia(this.getFuentesEnergia() - peticion.getFuentesEnergia());
+        }
+    }
+    
+    public void armarIntercambio(String tipo, String cantidad){
+        if ("Cañon".equals(tipo)){
+            this.cannon += Integer.valueOf(cantidad);
+        }
+        if ("Cañon Múltiple".equals(tipo)){
+            this.cannonMultiple += Integer.valueOf(cantidad);
+        }
+        if ("Cañon Barba Roja".equals(tipo)){
+            this.cannonBarbaRoja += Integer.valueOf(cantidad);
+        }
+        if ("Bombas".equals(tipo)){
+            this.bombas += Integer.valueOf(cantidad);
+        }if ("Barcos pirata".equals(tipo)){
+            this.barcosPirata += Integer.valueOf(cantidad);
+        }
+        if ("Acero".equals(tipo)){
+            this.acero += Integer.valueOf(cantidad);
+        }
+        if ("Fuentes de poder".equals(tipo)){
+            this.fuentesEnergia += Integer.valueOf(cantidad);
         }
     }
 }

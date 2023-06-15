@@ -4,7 +4,7 @@
  */
 package Interfaz;
 
-
+import Armas.*;
 import General.IConstants;
 import Islas.Grafo;
 import Jugador.Jugador;
@@ -532,6 +532,11 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         jLabel6.setText("Y");
 
         cmbTipoAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cañon", "Cañon Multiple", "Bomba", "Cañon Barba Roja" }));
+        cmbTipoAtaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoAtaqueActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -550,6 +555,11 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         });
 
         cmbOrientacionAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vertical", "Horizontal" }));
+        cmbOrientacionAtaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbOrientacionAtaqueActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -780,10 +790,27 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private int convertirOpcionTIpoAtaque(){
+        String ataque = cmbTipoAtaque.getSelectedItem().toString();
+        if (ataque == "Cañon"){
+            return 0;
+        }
+        if (ataque == "Cañon Multiple"){
+            return 1;
+        }
+        if (ataque == "Bomba"){
+            return 2;
+        }
+        if (ataque == "Cañon Barba Roja"){
+            return 3;
+        }
+        return -1;
+    }
     
     private void btnAtacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtacarActionPerformed
-        // TODO add your handling code here:
+        int tipoAtaque = convertirOpcionTIpoAtaque();
+        Arma arma = FactoryArmas.generaArma(tipoAtaque);
+        arma.atacar(jugadores.get(0), jugadores.get(1));
     }//GEN-LAST:event_btnAtacarActionPerformed
 
     private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
@@ -817,6 +844,14 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
             JOptionPane.showMessageDialog(null, "No se pudo agregar el componente solicitado, revise la ubicación y orientación elegida", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnComprarAgregarFabricaMouseClicked
+
+    private void cmbTipoAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoAtaqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoAtaqueActionPerformed
+
+    private void cmbOrientacionAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrientacionAtaqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbOrientacionAtaqueActionPerformed
     
     /**
      * @param args the command line arguments
