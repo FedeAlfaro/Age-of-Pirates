@@ -948,6 +948,12 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         while(true){
             for(Jugador j:jugadores){
                 j.recoger();
+                j.getMapa().verificarFabricaDisparo();
+                j.getMapa().verificarConectorDisparo();
+                j.getMapa().verificarFuenteDisparo();
+                if(j.getMapa().finalizar()){
+                    j.setVivo(false);
+                }
             }
             try {
                 Thread.sleep(2000);

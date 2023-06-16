@@ -582,6 +582,17 @@ public class Grafo implements IConstants{
         }
     }
     
+    public void verificarFuenteDisparo(){
+        if(matriz[vertices.get(0).fabrica.getX()][vertices.get(0).fabrica.getY()]==CODIGO_DISPARO 
+                && matriz[vertices.get(0).fabrica.getX()][vertices.get(0).fabrica.getY()+1]==CODIGO_DISPARO
+                && matriz[vertices.get(0).fabrica.getX()+1][vertices.get(0).fabrica.getY()]==CODIGO_DISPARO
+                && matriz[vertices.get(0).fabrica.getX()+1][vertices.get(0).fabrica.getY()+1]==CODIGO_DISPARO){
+
+            eliminarFuente();
+
+        }
+    }
+    
     //int IDvertice,int x,int y, int orientacion, int tipoFabrica
     public boolean verificarEspacioFabrica(int x,int y, int orientacion){
         if(orientacion == 0){
