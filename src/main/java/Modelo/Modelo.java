@@ -8,7 +8,7 @@ import Armas.*;
 import Fabricas.Enum.ORIENTACION;
 import Jugador.Inventario;
 import Jugador.Jugador;
-import Mercado.Mercado;
+import Mercado.MercadoFunc;
 import java.util.ArrayList;
 
 /**
@@ -92,6 +92,6 @@ public class Modelo {
             Inventario intercambio, int dinero){ // Podría hacerse uno para cada arma y queda mejor
         Jugador jugTurno = jugadores.get(idJugadorTurno);
         Jugador jugLlamado = jugadores.get(idJugadorLlamado);
-        Mercado.intercambio(jugTurno, jugLlamado, comprar, intercambio, dinero);
+        MercadoFunc.intercambio(jugTurno, jugLlamado, comprar, intercambio, dinero);
     }
 }

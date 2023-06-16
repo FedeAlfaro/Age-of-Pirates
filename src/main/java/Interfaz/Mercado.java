@@ -4,19 +4,27 @@
  */
 package Interfaz;
 
+import Armas.Arma;
+import Armas.FactoryArmas;
 import Jugador.*;
-import Mercado.*;
+import Mercado.MercadoFunc;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author USUARIO
  */
 public class Mercado extends javax.swing.JFrame {
+
+    private final ArrayList<Jugador> jugadores;
+    private final int jugadorTurno;
     /**
      * Creates new form Mercado
      */
-    public Mercado() {
+    public Mercado(ArrayList<Jugador> jugadores, int jugadorTurno) {
         initComponents();
+        this.jugadores = jugadores;
+        this.jugadorTurno = jugadorTurno;
     }
 
     /**
@@ -43,6 +51,11 @@ public class Mercado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         cmbSelecJugadorMercado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P1", "P2", "P3", "P4", "Maquina" }));
+        cmbSelecJugadorMercado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSelecJugadorMercadoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -185,12 +198,42 @@ public class Mercado extends javax.swing.JFrame {
         return -1;
     }
     
+    private int convetirJugadorAtacado(){
+        String jugador = cmbSelecJugadorMercado.getSelectedItem().toString();
+        if (jugador == "P1"){
+            return 0;
+        }
+        if (jugador == "P2"){
+            return 1;
+        }
+        if (jugador == "P3"){
+            return 2;
+        }
+        if (jugador == "P4"){
+            return 3;
+        }
+        return -1;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String intercambio = cmbTipoIntercambio.getSelectedItem().toString();
         String cantidad = txfCantIntercambio.getText();
+        int cantidadInt = Integer.parseInt(txfCantIntercambio.getText());
+        int jugadorPedido = convetirJugadorAtacado();
         Inventario inter = new Inventario();
         inter.armarIntercambio(intercambio, cantidad);
-        //comprar(jugadores.get(0), jugadores.get(1));
+        if (jugadores.get(jugadorPedido).getInventario().validaTransaccion(inter)){
+            ArrayList<Jugador> actualizados = MercadoFunc.comprar(jugadores.get(jugadorTurno), 
+                jugadores.get(jugadorPedido), inter, cantidadInt);
+            jugadores.set(jugadorTurno, actualizados.get(0));
+            jugadores.set(jugadorPedido, actualizados.get(1));
+            JOptionPane.showMessageDialog(null, "El jugador " + jugadorTurno + " intercambia con jugador " +  jugadorPedido, 
+                    "Intercambio", JOptionPane.OK_OPTION);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No cuenta con el suficiente material para intercambiar", 
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmbTipoIntercambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoIntercambioActionPerformed
@@ -204,10 +247,28 @@ public class Mercado extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String intercambio = cmbTipoIntercambio.getSelectedItem().toString();
         String cantidad = txfCantIntercambio.getText();
+        int cantidadInt = Integer.parseInt(txfCantIntercambio.getText());
+        int jugadorPedido = convetirJugadorAtacado();
         Inventario inter = new Inventario();
         inter.armarIntercambio(intercambio, cantidad);
-        //vender(jugadores.get(0), jugadores.get(1));
+        if (jugadores.get(jugadorTurno).getInventario().validaTransaccion(inter)){
+            ArrayList<Jugador> actualizados = MercadoFunc.vender(jugadores.get(jugadorTurno), 
+                jugadores.get(jugadorPedido), inter, cantidadInt);
+            jugadores.set(jugadorTurno, actualizados.get(0));
+            jugadores.set(jugadorPedido, actualizados.get(1));
+            JOptionPane.showMessageDialog(null, "El jugador " + jugadorTurno + " intercambia con jugador " +  jugadorPedido, 
+                    "Intercambio", JOptionPane.OK_OPTION);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No cuenta con el suficiente material para intercambiar", 
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cmbSelecJugadorMercadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelecJugadorMercadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSelecJugadorMercadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,7 +300,7 @@ public class Mercado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Mercado().setVisible(true);
+                //new Mercado().setVisible(true);
             }
         });
     }

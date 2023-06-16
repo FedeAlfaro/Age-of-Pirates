@@ -9,7 +9,6 @@ Fabricas\Mercado.class
 Chat\ClientHandler.class
 Chat\Server.class
 Interfaz\PantallaInicio$3.class
-Mercado\Mercado.class
 Communication\Package.class
 General\AgeOfPirates.class
 Interfaz\EspacioDeJuego$7.class
@@ -34,6 +33,7 @@ Interfaz\EspacioDeJuego$11.class
 Interfaz\EspacioDeJuego$5.class
 Armas\FactoryArmas.class
 Interfaz\EspacioDeJuego$9.class
+Mercado\MercadoFunc.class
 Interfaz\Mercado$5.class
 Chat\Client.class
 Mapa\Grafo.class
@@ -54,5 +54,6 @@ Interfaz\EspacioDeJuego$3.class
 Fabricas\Mina.class
 Islas\Vertice.class
 Armas\CannonBarbaRoja.class
+Interfaz\Mercado$6.class
 Fabricas\Armeria.class
 Armas\Bomba.class
