@@ -6,6 +6,7 @@ package Armas;
 
 import Jugador.Jugador;
 import Islas.Grafo;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,7 +25,8 @@ public class CannonMultiple extends Arma{
     
     // Métodos
     @Override
-    public void atacar(Jugador atacando, Jugador victima) {
+    public ArrayList<Jugador> atacar(Jugador atacando, Jugador victima) {
+        ArrayList<Jugador> jugadores = new ArrayList();
         if (victima.getMapa().matriz[targetX][targetY] == CODIGO_REMOLINO){
             ataquesRemolino(atacando);
             ganaFuente(victima, atacando);
@@ -41,6 +43,9 @@ public class CannonMultiple extends Arma{
             }
         }
         ganaFuente(atacando, victima);
+        jugadores.add(atacando);
+        jugadores.add(victima);
+        return jugadores;
     }
     
 }

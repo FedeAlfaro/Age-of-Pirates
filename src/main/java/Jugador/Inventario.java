@@ -26,7 +26,7 @@ public class Inventario {
         this.cannonBarbaRoja = 0;
         this.barcosPirata = 0;
         this.fuentesEnergia = 0;
-        this.acero = 0;
+        this.acero = 10000;
     }
     
     public int getCannon() {
@@ -63,6 +63,10 @@ public class Inventario {
 
     public int getBarcosPirata() {
         return barcosPirata;
+    }
+    
+    public int getAcero() {
+        return acero;
     }
 
     public void setBarcosPirata(int barcosPirata) {

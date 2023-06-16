@@ -1,4 +1,5 @@
 Jugador\Jugador.class
+Interfaz\EspacioDeJuego$13.class
 Islas\Grafo.class
 Fabricas\TemploBruja.class
 Interfaz\Mercado.class
@@ -38,6 +39,7 @@ Chat\Client.class
 Mapa\Grafo.class
 Interfaz\EspacioDeJuego$2.class
 Modelo\Modelo.class
+Interfaz\EspacioDeJuego$12.class
 Interfaz\EspacioDeJuego$6.class
 Interfaz\Mercado$2.class
 General\IConstants.class

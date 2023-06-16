@@ -7,6 +7,7 @@ package Armas;
 import General.IConstants;
 import Jugador.*;
 import Islas.Grafo;
+import java.util.ArrayList;
 
 /**
  *
@@ -52,7 +53,7 @@ public abstract class Arma implements IConstants{
     }
     
     // Métodos
-    public abstract void atacar(Jugador atacante, Jugador defensor);
+    public abstract ArrayList<Jugador> atacar(Jugador atacante, Jugador defensor);
     
     public void ganaFuente(Jugador atacante, Jugador defensor){
         if (!defensor.getMapa().hayFuente()){

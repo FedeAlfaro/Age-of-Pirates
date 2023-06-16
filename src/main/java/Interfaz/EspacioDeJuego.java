@@ -511,6 +511,8 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jLabel8 = new javax.swing.JLabel();
         btnAtacar = new javax.swing.JButton();
         cmbOrientacionAtaque = new javax.swing.JComboBox<>();
+        cmbJugadorAtacado = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         cmbComprarFabrica1 = new javax.swing.JComboBox<>();
@@ -739,6 +741,17 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
             }
         });
 
+        cmbJugadorAtacado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P1", "P2", "P3", "P4" }));
+        cmbJugadorAtacado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbJugadorAtacadoActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Seleccione el jugador");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -746,6 +759,19 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbOrientacionAtaque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAtacar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(271, 271, 271))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -760,20 +786,12 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(276, 276, 276)
                                 .addComponent(cmbTipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 191, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbOrientacionAtaque, 0, 127, Short.MAX_VALUE)
-                    .addComponent(btnAtacar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(277, 277, 277))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(cmbJugadorAtacado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -790,17 +808,21 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbJugadorAtacado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbTipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbOrientacionAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAtacar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1028,11 +1050,65 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         return -1;
     }
     
+    private int convertirOpcionTIpoAtaquePrecio(){
+        String ataque = cmbTipoAtaque.getSelectedItem().toString();
+        if (ataque == "Cañon"){
+            return PRECIO_CANNON;
+        }
+        if (ataque == "Cañon Multiple"){
+            return PRECIO_CANNONMULTIPLE;
+        }
+        if (ataque == "Bomba"){
+            return PRECIO_BOMBA;
+        }
+        if (ataque == "Cañon Barba Roja"){
+            return PRECIO_CANNONBARBAROJA;
+        }
+        return -1;
+    }
+    
+    private int convetirJugadorAtacado(){
+        String jugador = cmbJugadorAtacado.getSelectedItem().toString();
+        if (jugador == "P1"){
+            return 0;
+        }
+        if (jugador == "P2"){
+            return 1;
+        }
+        if (jugador == "P3"){
+            return 2;
+        }
+        if (jugador == "P4"){
+            return 3;
+        }
+        return -1;
+    }
+    
     private void btnAtacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtacarActionPerformed
+        // TODO add your handling code here:  
         int tipoAtaque = convertirOpcionTIpoAtaque();
-        Arma arma = FactoryArmas.generaArma(tipoAtaque);
-        arma.atacar(jugadores.get(0), jugadores.get(1));
-        colorearTodos();
+        int jugadorAtacado = convetirJugadorAtacado();
+        int precio = convertirOpcionTIpoAtaquePrecio();
+        String ataque = cmbTipoAtaque.getSelectedItem().toString();
+        jTextArea_sucesos.setText(jTextArea_sucesos.getText()+ "\nJug actual" + contadorJugador + 
+                "\tjugadorAtacado: " + jugadorAtacado + "\tTipo ataque: " + tipoAtaque+ 
+                "\tAcero" + jugadores.get(contadorJugador).getInventario().getAcero() + "\tPrecio: " + precio);
+        if (jugadores.get(contadorJugador).getInventario().getAcero() >= precio){
+            int posX = Integer.parseInt(cmbPosXAtaque.getSelectedItem().toString());
+            int posY = Integer.parseInt(cmbPosYAtaque.getSelectedItem().toString());
+            Arma arma = FactoryArmas.generaArma(tipoAtaque);
+            arma.setTargetX(posX);
+            arma.setTargetY(posY);
+            ArrayList<Jugador> actualizados = arma.atacar(jugadores.get(contadorJugador), jugadores.get(jugadorAtacado));
+            jugadores.set(contadorJugador, actualizados.get(0));
+            jugadores.set(jugadorAtacado, actualizados.get(1));
+            jTextArea_sucesos.setText(jTextArea_sucesos.getText()+ "\nEl jugador¨P" + contadorJugador + " ataca a P" + 
+                    jugadorAtacado + " con un " + ataque +" en: (" + posX + ", " + posY + ")");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No cuenta con el suficiente acero para atacar", 
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAtacarActionPerformed
 
     private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
@@ -1091,6 +1167,10 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         Mercado pantallaM = new Mercado();
         pantallaM.setVisible(true);
     }//GEN-LAST:event_btn_mercadoActionPerformed
+
+    private void cmbJugadorAtacadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJugadorAtacadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbJugadorAtacadoActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1137,6 +1217,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private javax.swing.JButton btn_mercado;
     private javax.swing.JComboBox<String> cmbComprarFabrica;
     private javax.swing.JComboBox<String> cmbComprarFabrica1;
+    private javax.swing.JComboBox<String> cmbJugadorAtacado;
     private javax.swing.JComboBox<String> cmbOrientacionAtaque;
     private javax.swing.JComboBox<String> cmbOrientacionFabrica;
     private javax.swing.JComboBox<String> cmbPosXAtaque;
@@ -1149,6 +1230,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1178,6 +1260,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     @Override
     public void run() {
         while(true){
+            colorearTodos();
             int contadorMuertos = 0;
             for(Jugador j:jugadores){
                 j.recoger();
