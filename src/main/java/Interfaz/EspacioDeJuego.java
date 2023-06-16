@@ -102,10 +102,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         Font font = new Font(fontName, Font.PLAIN, fontSize);
 
         // Asigna la fuente al JLabel lbl_Sucesos
-        lbl_Sucesos.setFont(font);
-        
-        lbl_Sucesos.setText("Se agregó la fuente en la posición x:"+"15"+" y: "+"15 \n");
-        lbl_Sucesos.setText(lbl_Sucesos.getText()+"Se agregó la fuente en la posición x:"+"15"+" y: "+"15");
         btnsMapaActual = btnsMapa1;
         
         miHilo = new Thread(this);
@@ -844,7 +840,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
         String mensaje = jTextFieldMensaje.getText();
         if(!mensaje.isEmpty()){
-            lbl_Chat.setText(lbl_Chat.getText()+"\n"+mensaje);
+            jTextArea_chat.setText(jTextArea_chat.getText()+"\n"+mensaje);
             jTextFieldMensaje.setText("");
         }
     }//GEN-LAST:event_btn_SendActionPerformed
