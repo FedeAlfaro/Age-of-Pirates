@@ -29,6 +29,7 @@ Interfaz\PantallaInicio$1.class
 Armas\CannonMultiple.class
 Interfaz\EspacioDeJuego.class
 Fabricas\Productor.class
+Interfaz\EspacioDeJuego$11.class
 Interfaz\EspacioDeJuego$5.class
 Armas\FactoryArmas.class
 Interfaz\EspacioDeJuego$9.class

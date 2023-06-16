@@ -17,6 +17,7 @@ public class Mercado extends Fabrica implements IConstants{
     public Mercado(int x, int y, int orientacion) {
         super(x, y, orientacion);
         costo = PRECIO_MERCADO;
+        this.nombre = "Mercado";
     }
     
 }

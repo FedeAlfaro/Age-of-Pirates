@@ -13,7 +13,7 @@ import Islas.*;
  * @author Usuario
  */
 public class AgeOfPirates {
-
+/*
     public static void main(String[] args) {
         Grafo g = new Grafo();
         
@@ -32,7 +32,7 @@ public class AgeOfPirates {
         PantallaInicio pantallaI = new PantallaInicio();
         
         pantallaI.setVisible(true);
-        /*
+        
         g.agregarArista(g.buscarVertice(0), g.buscarVertice(2));
         g.agregarArista(g.buscarVertice(2), g.buscarVertice(0));
         g.agregarArista(g.buscarVertice(0), g.buscarVertice(7));
@@ -53,6 +53,7 @@ public class AgeOfPirates {
         g.agregarArista(g.buscarVertice(6), g.buscarVertice(4));
         g.agregarArista(g.buscarVertice(4), g.buscarVertice(5));
         g.agregarArista(g.buscarVertice(5), g.buscarVertice(4));
-        */
+       
     }
+*/
 }

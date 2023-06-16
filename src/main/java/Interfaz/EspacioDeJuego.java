@@ -33,6 +33,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     ArrayList<Jugador> jugadores;
     private Thread miHilo;
     Jugador jugadorActual;
+    int contadorJugador = 0;
     /**
      * Creates new form EspacioDeJuego
      * @param cantidadJugadores
@@ -54,7 +55,10 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jugadores.get(0).getMapa().agregarFabrica(4,10,9,0,1);
         jugadores.get(0).getMapa().agregarFabrica(5,9,8,0,2);
         jugadores.get(0).getMapa().agregarFabrica(6,8,7,0,2);
-        jugadores.get(0).getMapa().agregarFabrica(7,7,6,0,0);   
+        jugadores.get(0).getMapa().agregarFabrica(7,7,6,0,0);  
+        jugadores.get(0).getMapa().agregarFabrica(8,3,1,0,3);
+        jugadores.get(0).getMapa().agregarConector(1, 1);
+        jugadores.get(0).getMapa().visibilizar();
         
         jugadores.get(1).getMapa().agregarFuente(15,15);
         jugadores.get(1).getMapa().agregarFabrica(1,14,13,0,0);
@@ -64,7 +68,10 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jugadores.get(1).getMapa().agregarFabrica(4,10,9,0,1);
         jugadores.get(1).getMapa().agregarFabrica(5,9,8,0,2);
         jugadores.get(1).getMapa().agregarFabrica(6,8,7,0,2);
-        jugadores.get(1).getMapa().agregarFabrica(7,7,6,0,0); 
+        jugadores.get(1).getMapa().agregarFabrica(7,7,6,0,0);
+        jugadores.get(1).getMapa().agregarFabrica(8,15,0,0,2);
+        jugadores.get(1).getMapa().agregarConector(15, 14);
+        jugadores.get(1).getMapa().agregarConector(14, 12);
         
         jugadores.get(2).getMapa().agregarFuente(15,15);
         jugadores.get(2).getMapa().agregarFabrica(1,14,13,0,0);
@@ -75,6 +82,10 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jugadores.get(2).getMapa().agregarFabrica(5,9,8,0,2);
         jugadores.get(2).getMapa().agregarFabrica(6,8,7,0,2);
         jugadores.get(2).getMapa().agregarFabrica(7,7,6,0,0); 
+        jugadores.get(2).getMapa().agregarFabrica(8,18,18,0,1);
+        jugadores.get(2).getMapa().agregarConector(15, 14);
+        jugadores.get(2).getMapa().agregarConector(14, 12);
+        jugadores.get(2).getMapa().agregarConector(13, 11);
         
         generarRemolinos();
         
@@ -126,6 +137,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         
         miHilo = new Thread(this);
             miHilo.start();
+            
+        jTextArea_sucesos.setText("Bienvenido");
+        jugadorActual = jugadores.get(0);
     }
 
     
@@ -134,35 +148,84 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         boolean resultado;
         switch(tipoFabrica){ //Mina(0), Armeria(1), TemploBrujas(2)
             case 0: //Fuente de poder
-                if(j.getMapa().getVertices().get(0).getFabrica() != null){
-                    j.getMapa().agregarFuente(x, y);
-                    resultado = true;
-                    colorearMapa(j.getMapa(),btnsMapa1);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Ya hay una fuente de poder", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                if(j.getDinero()-PRECIO_FUENTE_ENERGIA>0){
+                    if(j.getMapa().getVertices().get(0).getFabrica() != null){
+                        j.setDinero(j.getDinero()-PRECIO_FUENTE_ENERGIA);
+                        j.getMapa().agregarFuente(x, y);
+                        resultado = true;
+                        colorearMapa(j.getMapa(),btnsMapa1);
+                        jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nSe ha agregado una nueva fuente de poder al jugador "+jugadorActual.getId());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Ya hay una fuente de poder", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        resultado = false;
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null
+                            , "No tiene dinero suficiente para realizar la transacción", "Error"
+                            , JOptionPane.ERROR_MESSAGE);
                     resultado = false;
                 }
                 break;
             case 1:  //Mina
-                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 0); 
-                colorearMapa(j.getMapa(),btnsMapa1);
+                if(j.getDinero()-PRECIO_MINA>0){
+                    resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 0); 
+                    colorearMapa(j.getMapa(),btnsMapa1);
+                    jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nSe ha agregado una nueva mina al jugador "+jugadorActual.getId());
+                }else{
+                    JOptionPane.showMessageDialog(null
+                            , "No tiene dinero suficiente para realizar la transacción", "Error"
+                            , JOptionPane.ERROR_MESSAGE);
+                    resultado = false;
+                }
                 break;
             case 2:  //Armeria
-                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 1);
-                colorearMapa(j.getMapa(),btnsMapa1);
+                if(j.getDinero()-PRECIO_ARMERIA>0){
+                    resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 1);
+                    colorearMapa(j.getMapa(),btnsMapa1);
+                    jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nSe ha agregado una nueva armeria al jugador "+jugadorActual.getId());
+                }else{
+                    JOptionPane.showMessageDialog(null
+                            , "No tiene dinero suficiente para realizar la transacción", "Error"
+                            , JOptionPane.ERROR_MESSAGE);
+                    resultado = false;
+                }
                 break;
             case 3: //Fabrica de brujas
-                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 2);
-                colorearMapa(j.getMapa(),btnsMapa1);
+                if(j.getDinero()-PRECIO_TEMPLO_BRUJA>0){
+                    resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 2);
+                    colorearMapa(j.getMapa(),btnsMapa1);
+                    jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nSe ha agregado un nuevo templo de brujas al jugador "+jugadorActual.getId());
+                }else{
+                    JOptionPane.showMessageDialog(null
+                            , "No tiene dinero suficiente para realizar la transacción"
+                            , "Error", JOptionPane.ERROR_MESSAGE);
+                    resultado = false;
+                }
                 break;
             case 4:
-                resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 3);
-                colorearMapa(j.getMapa(),btnsMapa1);
+                if(j.getDinero()-PRECIO_MERCADO>0){
+                    resultado = j.getMapa().agregarFabrica(j.getNumeroComponente(), x, y, orientacion, 3);
+                    colorearMapa(j.getMapa(),btnsMapa1);
+                    jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nSe ha agregado un nuevo mercado al jugador "+jugadorActual.getId());
+                }else{
+                    JOptionPane.showMessageDialog(null
+                            , "No tiene dinero suficiente para realizar la transacción"
+                            , "Error", JOptionPane.ERROR_MESSAGE);
+                    resultado = false;
+                }
                 break;
             case 5: //Conector
-                resultado = j.getMapa().agregarConector(x, y);
-                colorearMapa(j.getMapa(),btnsMapa1);
+                if(j.getDinero()-PRECIO_CONECTORES>0){
+                    resultado = j.getMapa().agregarConector(x, y);
+                    colorearMapa(j.getMapa(),btnsMapa1);
+                    jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nSe ha agregado un nuevo conector al jugador "+jugadorActual.getId());
+                }else{
+                    JOptionPane.showMessageDialog(null
+                            , "No tiene dinero suficiente para realizar la transacción"
+                            , "Error", JOptionPane.ERROR_MESSAGE);
+                    resultado = false;
+                }
                 break;
             default:
                 resultado = false;
@@ -183,6 +246,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         for (int i = 0; i < TAMANO_MATRIZ; i++) {
             for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 switch (g.matriz[j][i]) {
+                    case 0:
+                        btns[i][j].setBackground(Color.LIGHT_GRAY);
+                        break;
                     case CODIGO_FUENTE:
                         //Amarillo Fuente //Azul Conector //Anaranjado mina //Magenta Bruja //Plateado armeria //Rojo bala
                         btns[i][j].setBackground(Color.YELLOW);
@@ -196,6 +262,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                     case CODIGO_MINA:
                         btns[i][j].setBackground(Color.ORANGE);
                         break;
+                    case CODIGO_MERCADO:  
+                        btns[i][j].setBackground(Color.BLACK);
+                        break;         
                     case CODIGO_TEMPLO_BRUJA:
                         btns[i][j].setBackground(Color.MAGENTA);
                         break;
@@ -205,9 +274,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                     case CODIGO_REMOLINO:  
                         btns[i][j].setBackground(Color.BLUE);
                         break;  
-                    case CODIGO_MERCADO:  
-                        btns[i][j].setBackground(Color.BLACK);
-                        break;      
                     default:
                         break;
                 }
@@ -223,6 +289,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         for (int i = 0; i < TAMANO_MATRIZ; i++) {
             for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 switch (g.retornarMatrizVisible()[j][i]) {
+                    case 0:
+                        btns[i][j].setBackground(Color.LIGHT_GRAY);
+                        break;
                     case CODIGO_FUENTE:
                         //Amarillo Fuente //Azul Conector //Anaranjado mina //Magenta Bruja //Plateado armeria //Rojo bala
                         btns[i][j].setBackground(Color.YELLOW);
@@ -311,7 +380,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                     //btn.setEnabled(false);
             }
         }
-        colorearMapa(jugadores.get(1).getMapa(),btnsMapa2);
+        colorearMapa2(jugadores.get(1).getMapa(),btnsMapa2);
     }
     
     public void initMapaEnemigo2(){
@@ -331,7 +400,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                     //btn.setEnabled(false);
             }
         }
-        colorearMapa(jugadores.get(2).getMapa(),btnsMapa3);
+        colorearMapa2(jugadores.get(2).getMapa(),btnsMapa3);
     }
     
     public void initMapaEnemigo3(){
@@ -351,7 +420,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                     //btn.setEnabled(false);
             }
         }
-        colorearMapa(jugadores.get(3).getMapa(),btnsMapa4);
+        colorearMapa2(jugadores.get(3).getMapa(),btnsMapa4);
     }
     
     public void initMapaEnemigo4(){
@@ -371,7 +440,38 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                     //btn.setEnabled(false);
             }
         }
-        colorearMapa(jugadores.get(4).getMapa(),btnsMapa5);
+        colorearMapa2(jugadores.get(4).getMapa(),btnsMapa5);
+    }
+    
+    public void colorearTodos(){
+        switch(jugadores.size()){
+            case 1:
+                colorearMapa(jugadorActual.getMapa(), btnsMapa1);
+            case 2:
+                colorearMapa(jugadorActual.getMapa(), btnsMapa1);
+                colorearMapa2(jugadores.get((contadorJugador+1)% jugadores.size()).getMapa(), btnsMapa2);
+                break;
+            case 3:
+                colorearMapa(jugadorActual.getMapa(), btnsMapa1);
+                colorearMapa2(jugadores.get((contadorJugador+1)% jugadores.size()).getMapa(), btnsMapa2);
+                colorearMapa2(jugadores.get((contadorJugador+2)% jugadores.size()).getMapa(), btnsMapa3);
+                break;
+            case 4:
+                colorearMapa(jugadorActual.getMapa(), btnsMapa1);
+                colorearMapa2(jugadores.get((contadorJugador+1)% jugadores.size()).getMapa(), btnsMapa2);
+                colorearMapa2(jugadores.get((contadorJugador+2)% jugadores.size()).getMapa(), btnsMapa3);
+                colorearMapa2(jugadores.get((contadorJugador+3)% jugadores.size()).getMapa(), btnsMapa4);
+                break;
+            case 5:
+                colorearMapa(jugadorActual.getMapa(), btnsMapa1);
+                colorearMapa2(jugadores.get((contadorJugador+1)% jugadores.size()).getMapa(), btnsMapa2);
+                colorearMapa2(jugadores.get((contadorJugador+2)% jugadores.size()).getMapa(), btnsMapa3);
+                colorearMapa2(jugadores.get((contadorJugador+3)% jugadores.size()).getMapa(), btnsMapa4);
+                colorearMapa2(jugadores.get((contadorJugador+4)% jugadores.size()).getMapa(), btnsMapa5);
+                break;
+            default:
+                break;
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -904,12 +1004,13 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         int tipoAtaque = convertirOpcionTIpoAtaque();
         Arma arma = FactoryArmas.generaArma(tipoAtaque);
         arma.atacar(jugadores.get(0), jugadores.get(1));
+        colorearTodos();
     }//GEN-LAST:event_btnAtacarActionPerformed
 
     private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
         String mensaje = jTextFieldMensaje.getText();
         if(!mensaje.isEmpty()){
-            jTextArea_chat.setText(jTextArea_chat.getText()+"\n"+mensaje);
+            jTextArea_chat.setText(jTextArea_chat.getText()+"\n"+"Jugador "+jugadorActual.getId()+": "+mensaje);
             jTextFieldMensaje.setText("");
         }
     }//GEN-LAST:event_btn_SendActionPerformed
@@ -947,17 +1048,13 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     }//GEN-LAST:event_cmbOrientacionAtaqueActionPerformed
 
     private void btn_TurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TurnoActionPerformed
-        // TODO add your handling code here:           
-        int contador = 0;
-        jugadorActual = jugadores.get(contador);
-        contador = (contador + 1) % jugadores.size();
-        
-        colorearMapa(jugadorActual.getMapa(), btnsMapa3);
-        colorearMapa2(jugadores.get(contador).getMapa(), btnsMapaActual);
-        
-        
-        
-        
+        // TODO add your handling code here:   
+        jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nTerminó el turno del jugador "+jugadorActual.getId());
+        contadorJugador++;
+        contadorJugador = (contadorJugador) % jugadores.size();
+        jugadorActual = jugadores.get(contadorJugador);
+        jTextArea_sucesos.setText(jTextArea_sucesos.getText()+"\nComienza el turno del jugador "+jugadorActual.getId());
+        colorearTodos();
        
     }//GEN-LAST:event_btn_TurnoActionPerformed
     

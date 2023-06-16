@@ -470,12 +470,34 @@ public class Grafo implements IConstants{
         for(int i=0;i<vertices.size();i++){
             if(vertices.get(i).fabrica!=null){
                 if(vertices.get(i).fabrica.isVisible()){
-                    if(vertices.get(i).fabrica.getNombre() == "Armeria"){
-                        matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
-                    }else if(vertices.get(i).fabrica.getNombre() == "Mina"){
-                        matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
-                    }else if(vertices.get(i).fabrica.getNombre() == "Templo de brujas"){
-                        matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                    if(vertices.get(i).fabrica.getOrientacion()==VERTICAL){
+                        if(vertices.get(i).fabrica.getNombre() == "Armeria"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()+1] = CODIGO_ARMERIA;
+                        }else if(vertices.get(i).fabrica.getNombre() == "Mina"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()+1] = CODIGO_MINA;
+                        }else if(vertices.get(i).fabrica.getNombre() == "Templo de brujas"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()+1] = CODIGO_TEMPLO_BRUJA;
+                        }else if(vertices.get(i).fabrica.getNombre() == "Mercado"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MERCADO;
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()+1] = CODIGO_MERCADO;
+                        }
+                    }else{
+                        if(vertices.get(i).fabrica.getNombre() == "Armeria"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
+                            matrizAux[vertices.get(i).fabrica.getX()+1][vertices.get(i).fabrica.getY()] = CODIGO_ARMERIA;
+                        }else if(vertices.get(i).fabrica.getNombre() == "Mina"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
+                            matrizAux[vertices.get(i).fabrica.getX()+1][vertices.get(i).fabrica.getY()] = CODIGO_MINA;
+                        }else if(vertices.get(i).fabrica.getNombre() == "Templo de brujas"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                            matrizAux[vertices.get(i).fabrica.getX()+1][vertices.get(i).fabrica.getY()] = CODIGO_TEMPLO_BRUJA;
+                        }else if(vertices.get(i).fabrica.getNombre() == "Mercado"){
+                            matrizAux[vertices.get(i).fabrica.getX()][vertices.get(i).fabrica.getY()] = CODIGO_MERCADO;
+                            matrizAux[vertices.get(i).fabrica.getX()+1][vertices.get(i).fabrica.getY()] = CODIGO_MERCADO;
+                        }
                     }
                 }
             }
@@ -485,7 +507,13 @@ public class Grafo implements IConstants{
                 matrizAux[c.getX()][c.getY()] = CODIGO_CONECTOR;
             }
         }
-        
+        for(int i=0;i<TAMANO_MATRIZ;i++){
+            for(int j=0;j<TAMANO_MATRIZ;j++){
+                if(matriz[i][j]==CODIGO_DISPARO){
+                    matrizAux[i][j]=CODIGO_DISPARO;
+                }
+            }
+        }
         return matrizAux;
     }
     
