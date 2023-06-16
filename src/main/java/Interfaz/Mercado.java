@@ -10,6 +10,7 @@ import Jugador.*;
 import Mercado.MercadoFunc;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 /**
  *
  * @author USUARIO
@@ -18,13 +19,15 @@ public class Mercado extends javax.swing.JFrame {
 
     private final ArrayList<Jugador> jugadores;
     private final int jugadorTurno;
+    private final JTextArea jTextArea_sucesos;
     /**
      * Creates new form Mercado
      */
-    public Mercado(ArrayList<Jugador> jugadores, int jugadorTurno) {
+    public Mercado(ArrayList<Jugador> jugadores, int jugadorTurno, JTextArea jTextArea_sucesos) {
         initComponents();
         this.jugadores = jugadores;
         this.jugadorTurno = jugadorTurno;
+        this.jTextArea_sucesos = jTextArea_sucesos;
     }
 
     /**
@@ -229,10 +232,15 @@ public class Mercado extends javax.swing.JFrame {
             jugadores.set(jugadorPedido, actualizados.get(1));
             JOptionPane.showMessageDialog(null, "El jugador " + jugadorTurno + " intercambia con jugador " +  jugadorPedido, 
                     "Intercambio", JOptionPane.OK_OPTION);
+            jTextArea_sucesos.setText(jTextArea_sucesos.getText()+ "El jugador " + jugadorTurno + 
+                    " intercambia con jugador " +  jugadorPedido);
         }
         else{
-            JOptionPane.showMessageDialog(null, "No cuenta con el suficiente material para intercambiar", 
+            JOptionPane.showMessageDialog(null, "No cuenta con el suficiente " +
+                     "material para intercambiar el jugador " + jugadorTurno + " con el jugador " +  jugadorPedido, 
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
+            jTextArea_sucesos.setText(jTextArea_sucesos.getText()+ "No cuenta con el suficiente " +
+                     "material para intercambiar el jugador " + jugadorTurno + " con el jugador " +  jugadorPedido);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

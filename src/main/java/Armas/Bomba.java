@@ -66,6 +66,38 @@ public class Bomba extends Arma {
                     victima.getMapa().setDatoMatriz(targetX, targetY+1, CODIGO_DISPARO);
                 }
             }
+            if (orientacion.getValue() == 1){
+                if (targetX == TAMANO_MATRIZ-1){
+                    victima.getMapa().setDatoMatriz(targetX+3, targetY-2, CODIGO_DISPARO);
+                }
+                else{
+                    victima.getMapa().setDatoMatriz(targetX+5, targetY-2, CODIGO_DISPARO);
+                }
+            }
+            else{
+                if (targetY == TAMANO_MATRIZ-1){
+                    victima.getMapa().setDatoMatriz(targetX+5, targetY+3, CODIGO_DISPARO);
+                }
+                else{
+                    victima.getMapa().setDatoMatriz(targetX-5, targetY-2, CODIGO_DISPARO);
+                }
+            }
+            if (orientacion.getValue() == 1){
+                if (targetX == TAMANO_MATRIZ-1){
+                    victima.getMapa().setDatoMatriz(targetX+4, targetY+4, CODIGO_DISPARO);
+                }
+                else{
+                    victima.getMapa().setDatoMatriz(targetX-3, targetY-3, CODIGO_DISPARO);
+                }
+            }
+            else{
+                if (targetY == TAMANO_MATRIZ-1){
+                    victima.getMapa().setDatoMatriz(targetX+2, targetY+4, CODIGO_DISPARO);
+                }
+                else{
+                    victima.getMapa().setDatoMatriz(targetX+2, targetY+4, CODIGO_DISPARO);
+                }
+            }
         }
         ganaFuente(atacando, victima);
         jugadores.add(atacando);

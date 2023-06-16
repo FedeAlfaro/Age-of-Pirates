@@ -1164,7 +1164,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
 
     private void btn_mercadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mercadoActionPerformed
         // TODO add your handling code here:
-        Mercado pantallaM = new Mercado(jugadores, contadorJugador);
+        Mercado pantallaM = new Mercado(jugadores, contadorJugador, jTextArea_sucesos);
         pantallaM.setVisible(true);
     }//GEN-LAST:event_btn_mercadoActionPerformed
 
