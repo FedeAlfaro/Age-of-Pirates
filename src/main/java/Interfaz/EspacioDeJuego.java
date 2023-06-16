@@ -32,7 +32,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private final int tamano = 30;
     ArrayList<Jugador> jugadores;
     private Thread miHilo;
-    
+    Jugador jugadorActual;
     /**
      * Creates new form EspacioDeJuego
      * @param cantidadJugadores
@@ -55,6 +55,26 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jugadores.get(0).getMapa().agregarFabrica(5,9,8,0,2);
         jugadores.get(0).getMapa().agregarFabrica(6,8,7,0,2);
         jugadores.get(0).getMapa().agregarFabrica(7,7,6,0,0);   
+        
+        jugadores.get(1).getMapa().agregarFuente(15,15);
+        jugadores.get(1).getMapa().agregarFabrica(1,14,13,0,0);
+        jugadores.get(1).getMapa().agregarFabrica(2,13,12,0,0);
+        jugadores.get(1).getMapa().agregarFabrica(3,12,11,0,1);
+        jugadores.get(1).getMapa().agregarFabrica(3,11,10,0,1);
+        jugadores.get(1).getMapa().agregarFabrica(4,10,9,0,1);
+        jugadores.get(1).getMapa().agregarFabrica(5,9,8,0,2);
+        jugadores.get(1).getMapa().agregarFabrica(6,8,7,0,2);
+        jugadores.get(1).getMapa().agregarFabrica(7,7,6,0,0); 
+        
+        jugadores.get(2).getMapa().agregarFuente(15,15);
+        jugadores.get(2).getMapa().agregarFabrica(1,14,13,0,0);
+        jugadores.get(2).getMapa().agregarFabrica(2,13,12,0,0);
+        jugadores.get(2).getMapa().agregarFabrica(3,12,11,0,1);
+        jugadores.get(2).getMapa().agregarFabrica(3,11,10,0,1);
+        jugadores.get(2).getMapa().agregarFabrica(4,10,9,0,1);
+        jugadores.get(2).getMapa().agregarFabrica(5,9,8,0,2);
+        jugadores.get(2).getMapa().agregarFabrica(6,8,7,0,2);
+        jugadores.get(2).getMapa().agregarFabrica(7,7,6,0,0); 
         
         generarRemolinos();
         
@@ -163,6 +183,46 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         for (int i = 0; i < TAMANO_MATRIZ; i++) {
             for (int j = 0; j < TAMANO_MATRIZ; j++) {
                 switch (g.matriz[j][i]) {
+                    case CODIGO_FUENTE:
+                        //Amarillo Fuente //Azul Conector //Anaranjado mina //Magenta Bruja //Plateado armeria //Rojo bala
+                        btns[i][j].setBackground(Color.YELLOW);
+                        break;
+                    case CODIGO_CONECTOR:
+                        btns[i][j].setBackground(Color.CYAN);
+                        break;
+                    case CODIGO_ARMERIA:
+                        btns[i][j].setBackground(Color.DARK_GRAY);
+                        break;
+                    case CODIGO_MINA:
+                        btns[i][j].setBackground(Color.ORANGE);
+                        break;
+                    case CODIGO_TEMPLO_BRUJA:
+                        btns[i][j].setBackground(Color.MAGENTA);
+                        break;
+                    case CODIGO_DISPARO:  
+                        btns[i][j].setBackground(Color.RED);
+                        break;
+                    case CODIGO_REMOLINO:  
+                        btns[i][j].setBackground(Color.BLUE);
+                        break;  
+                    case CODIGO_MERCADO:  
+                        btns[i][j].setBackground(Color.BLACK);
+                        break;      
+                    default:
+                        break;
+                }
+                
+                
+            }
+        }
+    }
+    
+    public void colorearMapa2(Grafo g, JButton[][] btns){
+        Point puntoInicial = new Point(50,0);
+        
+        for (int i = 0; i < TAMANO_MATRIZ; i++) {
+            for (int j = 0; j < TAMANO_MATRIZ; j++) {
+                switch (g.retornarMatrizVisible()[j][i]) {
                     case CODIGO_FUENTE:
                         //Amarillo Fuente //Azul Conector //Anaranjado mina //Magenta Bruja //Plateado armeria //Rojo bala
                         btns[i][j].setBackground(Color.YELLOW);
@@ -351,7 +411,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jLabel8 = new javax.swing.JLabel();
         btnAtacar = new javax.swing.JButton();
         cmbOrientacionAtaque = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         cmbComprarFabrica1 = new javax.swing.JComboBox<>();
@@ -363,6 +422,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jLabel13 = new javax.swing.JLabel();
         cmbOrientacionFabrica = new javax.swing.JComboBox<>();
         btnComprarAgregarFabrica = new javax.swing.JButton();
+        btn_Turno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -577,10 +637,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("SIGUIENTE");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -615,9 +671,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cmbOrientacionAtaque, 0, 127, Short.MAX_VALUE)
                     .addComponent(btnAtacar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(80, 80, 80)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
+                .addGap(277, 277, 277))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -643,9 +697,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 .addGap(18, 18, 18)
                 .addComponent(cmbOrientacionAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAtacar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addComponent(btnAtacar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -759,6 +811,15 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        btn_Turno.setBackground(new java.awt.Color(51, 51, 255));
+        btn_Turno.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Turno.setText("SIGUIENTE");
+        btn_Turno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TurnoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -784,17 +845,25 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                         .addGap(313, 313, 313)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(664, 664, 664)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
+                        .addComponent(btn_Turno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_Turno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(22, 22, 22)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -876,6 +945,21 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private void cmbOrientacionAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrientacionAtaqueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbOrientacionAtaqueActionPerformed
+
+    private void btn_TurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TurnoActionPerformed
+        // TODO add your handling code here:           
+        int contador = 0;
+        jugadorActual = jugadores.get(contador);
+        contador = (contador + 1) % jugadores.size();
+        
+        colorearMapa(jugadorActual.getMapa(), btnsMapa3);
+        colorearMapa2(jugadores.get(contador).getMapa(), btnsMapaActual);
+        
+        
+        
+        
+       
+    }//GEN-LAST:event_btn_TurnoActionPerformed
     
     /**
      * @param args the command line arguments
@@ -918,6 +1002,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private javax.swing.JButton btnAtacar;
     private javax.swing.JButton btnComprarAgregarFabrica;
     private javax.swing.JButton btn_Send;
+    private javax.swing.JButton btn_Turno;
     private javax.swing.JComboBox<String> cmbComprarFabrica;
     private javax.swing.JComboBox<String> cmbComprarFabrica1;
     private javax.swing.JComboBox<String> cmbOrientacionAtaque;
@@ -927,7 +1012,6 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private javax.swing.JComboBox<String> cmbPosYAtaque;
     private javax.swing.JComboBox<String> cmbPosYFabricas;
     private javax.swing.JComboBox<String> cmbTipoAtaque;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
