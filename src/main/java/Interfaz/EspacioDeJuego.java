@@ -946,6 +946,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     @Override
     public void run() {
         while(true){
+            int contadorMuertos = 0;
             for(Jugador j:jugadores){
                 j.recoger();
                 j.getMapa().verificarFabricaDisparo();
@@ -954,11 +955,18 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 if(j.getMapa().finalizar()){
                     j.setVivo(false);
                 }
+                if(!j.getVivo()){
+                    contadorMuertos++;
+                }
             }
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Mina.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(contadorMuertos==jugadores.size()-1){
+                
+                JOptionPane.showMessageDialog(null, "Felicidades jugador: "+jugadores.stream().filter(p->p.getVivo()==true).toList().get(0).getId()+" has ganado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
