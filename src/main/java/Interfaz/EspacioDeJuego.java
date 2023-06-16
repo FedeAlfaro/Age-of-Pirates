@@ -330,9 +330,11 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         panelChat = new javax.swing.JPanel();
         jTextFieldMensaje = new javax.swing.JTextField();
         btn_Send = new javax.swing.JButton();
-        lbl_Chat = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea_chat = new javax.swing.JTextArea();
         panelSucesos = new javax.swing.JPanel();
-        lbl_Sucesos = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea_sucesos = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -353,6 +355,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         jLabel8 = new javax.swing.JLabel();
         btnAtacar = new javax.swing.JButton();
         cmbOrientacionAtaque = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         cmbComprarFabrica1 = new javax.swing.JComboBox<>();
@@ -400,6 +403,10 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
             }
         });
 
+        jTextArea_chat.setColumns(20);
+        jTextArea_chat.setRows(5);
+        jScrollPane1.setViewportView(jTextArea_chat);
+
         javax.swing.GroupLayout panelChatLayout = new javax.swing.GroupLayout(panelChat);
         panelChat.setLayout(panelChatLayout);
         panelChatLayout.setHorizontalGroup(
@@ -407,7 +414,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
             .addGroup(panelChatLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lbl_Chat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(panelChatLayout.createSequentialGroup()
                         .addComponent(jTextFieldMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -417,9 +424,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
         panelChatLayout.setVerticalGroup(
             panelChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelChatLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(lbl_Chat, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                     .addComponent(btn_Send, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -428,23 +435,24 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
 
         panelSucesos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lbl_Sucesos.setText("Sucesos");
-        lbl_Sucesos.setName(""); // NOI18N
+        jTextArea_sucesos.setColumns(20);
+        jTextArea_sucesos.setRows(5);
+        jScrollPane2.setViewportView(jTextArea_sucesos);
 
         javax.swing.GroupLayout panelSucesosLayout = new javax.swing.GroupLayout(panelSucesos);
         panelSucesos.setLayout(panelSucesosLayout);
         panelSucesosLayout.setHorizontalGroup(
             panelSucesosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSucesosLayout.createSequentialGroup()
+            .addGroup(panelSucesosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_Sucesos, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelSucesosLayout.setVerticalGroup(
             panelSucesosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSucesosLayout.createSequentialGroup()
+            .addGroup(panelSucesosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_Sucesos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -573,6 +581,10 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(51, 51, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("SIGUIENTE");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -594,7 +606,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(276, 276, 276)
                                 .addComponent(cmbTipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 191, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -607,7 +619,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cmbOrientacionAtaque, 0, 127, Short.MAX_VALUE)
                     .addComponent(btnAtacar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(277, 277, 277))
+                .addGap(80, 80, 80)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -633,7 +647,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 .addGap(18, 18, 18)
                 .addComponent(cmbOrientacionAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAtacar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAtacar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -786,7 +802,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -915,6 +931,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private javax.swing.JComboBox<String> cmbPosYAtaque;
     private javax.swing.JComboBox<String> cmbPosYFabricas;
     private javax.swing.JComboBox<String> cmbTipoAtaque;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -930,10 +947,12 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Run
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea_chat;
+    private javax.swing.JTextArea jTextArea_sucesos;
     private javax.swing.JTextField jTextFieldMensaje;
-    private javax.swing.JLabel lbl_Chat;
-    private javax.swing.JLabel lbl_Sucesos;
     private javax.swing.JPanel panelChat;
     private javax.swing.JPanel panelMapa;
     private javax.swing.JPanel panelMapaEnemigo1;
