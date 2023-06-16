@@ -5,6 +5,7 @@
 package Interfaz;
 
 import Armas.*;
+import Fabricas.Mina;
 import General.IConstants;
 import Islas.Grafo;
 import Jugador.Jugador;
@@ -13,13 +14,15 @@ import java.awt.Font;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 /**
  *
  * @author USUARIO
  */
-public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
+public class EspacioDeJuego extends javax.swing.JFrame implements IConstants,Runnable{
     private JButton[][] btnsMapa1;
     private JButton[][] btnsMapa2;
     private JButton[][] btnsMapa3;
@@ -28,7 +31,7 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private JButton[][] btnsMapaActual;
     private final int tamano = 30;
     ArrayList<Jugador> jugadores;
-    //Grafo g = new Grafo();
+    private Thread miHilo;
     
     /**
      * Creates new form EspacioDeJuego
@@ -104,6 +107,9 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
         lbl_Sucesos.setText("Se agregó la fuente en la posición x:"+"15"+" y: "+"15 \n");
         lbl_Sucesos.setText(lbl_Sucesos.getText()+"Se agregó la fuente en la posición x:"+"15"+" y: "+"15");
         btnsMapaActual = btnsMapa1;
+        
+        miHilo = new Thread(this);
+            miHilo.start();
     }
 
     
@@ -936,4 +942,18 @@ public class EspacioDeJuego extends javax.swing.JFrame implements IConstants{
     private javax.swing.JPanel panelMapaEnemigo4;
     private javax.swing.JPanel panelSucesos;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while(true){
+            for(Jugador j:jugadores){
+                j.recoger();
+            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Mina.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

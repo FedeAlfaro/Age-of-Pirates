@@ -4,8 +4,12 @@
  */
 package Jugador;
 
+import Fabricas.Mina;
+import Fabricas.TemploBruja;
 import General.IConstants;
 import Islas.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -75,5 +79,23 @@ public class Jugador implements IConstants{
     public int getNumeroComponente(){
         numeroComponente++;
         return numeroComponente-1;
+    }
+    
+    public boolean recoger(){
+        for(Vertice vertice: mapa.getVertices()){
+            try {
+                if(vertice.getFabrica().getClass() == Mina.class){
+                    Mina mina = (Mina)vertice.getFabrica();
+                    inventario.incrementarAcero(mina.recogerAcero());
+                    return true;
+                }else if(vertice.getFabrica().getClass() == TemploBruja.class){
+                    TemploBruja temploBruja = (TemploBruja)vertice.getFabrica();
+                    return true;
+                }
+            } catch (Exception ex) {
+                System.out.println("Error al parsear fabrica");
+            }
+        }
+        return false;
     }
 }

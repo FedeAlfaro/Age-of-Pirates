@@ -58,6 +58,8 @@ public class Grafo implements IConstants{
             switch (tipoFabrica) {
                 case 0:
                     Fabrica mina = new Mina(x,y,orientacion);
+                    Mina m = (Mina)mina;
+                    m.ejecutar();
                     vertice.fabrica = mina;
                     matriz[x][y] = CODIGO_MINA;
                     if(orientacion == 0){
@@ -250,6 +252,13 @@ public class Grafo implements IConstants{
             }
         }
         conectores.stream().forEach(p->p.eliminarVertice(v));
+        if(v.getFabrica().getClass() == Mina.class){
+            Mina mina = (Mina)v.getFabrica();
+            mina.stop();
+        }else if(v.getFabrica().getClass() == TemploBruja.class){
+            TemploBruja temploBruja = (TemploBruja)v.getFabrica();
+            
+        }
         vertices.remove(v);
     }
     

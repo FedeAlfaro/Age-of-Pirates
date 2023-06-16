@@ -164,4 +164,8 @@ public class Inventario {
             this.fuentesEnergia += Integer.valueOf(cantidad);
         }
     }
+    
+    public void incrementarAcero(int aceroIngresado){
+        acero += aceroIngresado;
+    }
 }
